@@ -1,6 +1,7 @@
 DESCRIPTION
 ------------
 Create a simple application using ReactJs / NextJs of your choice.
+After completing the task, host the project on github and provide us with a link.
 
 The application can be used by both authorized and unauthorized users. 
 
