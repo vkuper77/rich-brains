@@ -3,6 +3,7 @@ DESCRIPTION
 Create a simple application using ReactJs / NextJs of your choice.
 
 The application can be used by both authorized and unauthorized users. 
+
   -An unauthorized user can see only the login page and table with clients, he/she doesn't have possibility to manipulate clients and open them on another page. All pages which can change clients database have to be hidden from this user.
 
   -An authorized user can see table with clients, also he/she is granted access to open client on another page, edit, delete and add user.
