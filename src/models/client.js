@@ -5,11 +5,12 @@ const fs = require('fs');
 
 module.exports = class Client {
 
-  constructor(name, surname, age, phone) {
+  constructor(name, surname, age, phone, country) {
     this.name = name;
     this.surname = surname;
     this.age = age;
     this.phone = phone;
+    this.country = country;
     this.id = shortid.generate();
   }
 
@@ -19,6 +20,7 @@ module.exports = class Client {
     age: this.age,
     phone: this.phone,
     id: this.id,
+    country: this.country,
   });
 
   addUser = (usersArr) => {

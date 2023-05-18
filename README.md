@@ -9,6 +9,8 @@ The application can be used by both authorized and unauthorized users.
 
   -An authorized user can see table with clients, also he/she is granted access to open client on another page, edit, delete and add user.
 
+  Sorting must be done on the frontend side.
+
 DOCUMENTATION
 ------------
 - POST http://localhost:3333/clients/add `params: name, surname, age, phone`

@@ -12,23 +12,9 @@ exports.checkToken = (request, response, next) => {
 };
 
 exports.getUsers = (request, response) => {
-  const expr = request?.query?.filterName;
-  switch (expr) {
-    case 'abc':
-      Client.readUsers(response).then(r => {
-        response.status(CONST.RESP_STATUS.OK).json({ clients: r.sort((a, b) => a.name - b.name) });
-      });
-      break;
-    case 'cba':
-      Client.readUsers(response).then(r => {
-        response.status(CONST.RESP_STATUS.OK).json({ clients: r.sort((a, b) => b.name - a.name) });
-      });
-      break;
-    default:
-      Client.readUsers(response).then(r => {
-        response.status(CONST.RESP_STATUS.OK).json({ clients: r });
-      })
-  }
+  Client.readUsers(response).then(r => {
+    response.status(CONST.RESP_STATUS.OK).json({ clients: r });
+  })
 };
 
 exports.getUser = (request, response) => {
@@ -59,7 +45,7 @@ exports.editUser = (request, response) => {
     if (index === -1) {
       response.status(CONST.RESP_STATUS.ERROR).json(utils.returnErrorMsg(CONST.ERROR_MSGS.COMMON.NOT_FOUND));
     } else {
-      r[index] = { ...r[index], name, surname, age, phone };
+      r[index] = { ...r[index], name, surname, age, phone, country };
       fs.writeFile(CONST.CLIENTS_PATH, JSON.stringify(r), (error) => {
         if (error) {
           response.status(CONST.RESP_STATUS.ERROR).json(utils.returnErrorMsg(CONST.ERROR_MSGS.CLIENTS.CANT_SAVE));
@@ -83,8 +69,8 @@ exports.deleteUser = (request, response) => {
 };
 
 exports.addUser = (request, response) => {
-  const { name, surname, age, phone } = request.body;
-  const isEmptyParam = Client.checkParams(response, { name, surname, age, phone });
+  const { name, surname, age, phone, country } = request.body;
+  const isEmptyParam = Client.checkParams(response, { name, surname, age, phone, country });
   if (isEmptyParam) {
     return
   }
@@ -93,7 +79,7 @@ exports.addUser = (request, response) => {
     if (isExists) {
       response.status(CONST.RESP_STATUS.ERROR).json(utils.returnErrorMsg(CONST.ERROR_MSGS.CLIENTS.DUPLICATE));
     } else {
-      const newClient = new Client(name, surname, age, phone);
+      const newClient = new Client(name, surname, age, phone, country);
       newClient.addUser(r);
       response.status(CONST.RESP_STATUS.OK).json({ client: newClient.returnThisUser() });
     }
