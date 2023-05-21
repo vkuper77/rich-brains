@@ -18,6 +18,10 @@
     padding: 0 2.5rem;
 }
 
+.logo img:last-child {
+    display: none;
+}
+
 .main{
     display: flex;
     flex: 1;
@@ -70,5 +74,17 @@
     }
     .main{
         margin: 0 1.25rem;
+    }
+
+    .logo{
+        padding: 1.25rem;
+    }
+
+    .logo img:first-child {
+        display: none;
+    }
+
+    .logo img:last-child {
+        display: flex;
     }
 }

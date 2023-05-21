@@ -19,7 +19,8 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
         <div className='wrapper'>
             <div className='container _content'>
                 <div className='logo'>
-                    <img alt='logo' src={require('../../assets/image/logo.png')}/>
+                    <img alt='logo' src={require('../../assets/image/logo-large.png')}/>
+                    <img alt='logo' src={require('../../assets/image/logo-small.png')}/>
                 </div>
                 <div className='main'>
                     <h2 className='route'>{routeName}</h2>
