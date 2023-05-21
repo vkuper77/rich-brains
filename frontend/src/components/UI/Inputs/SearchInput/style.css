@@ -1,0 +1,23 @@
+.container{
+    position: relative;
+}
+
+.input {
+    width: 12.5rem;
+    height: 2.5rem;
+    background-color: var(--color-white);
+    padding-left: 2.62rem;
+    border-radius: 4px;
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    outline: none;
+    border:1px solid rgba(38, 38, 38, 0.12);
+}
+
+.search {
+    position: absolute;
+    top: 10px;
+    left: 16px;
+    display: block;
+}

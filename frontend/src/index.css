@@ -5,6 +5,7 @@
     --color-danger: #E9281B;
     --color-light-danger: #FA6055;
     --color-grey: #E5E5E5;
+    --color-grey-xl: #87898F;
     --color-white: #FFFFFF;
     --color-black: #000000;
     --color-light-black: #313131;
@@ -58,6 +59,7 @@ body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: 'proxima-nova', sans-serif;
 }
 
 ._content {

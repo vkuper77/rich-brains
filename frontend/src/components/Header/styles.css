@@ -60,3 +60,15 @@
    color: var(--color-white);
     margin-right: 7px;
 }
+
+@media(max-width: 500px) {
+    .button {
+        padding: 0.65rem;
+    }
+    .button > span {
+        display: none;
+    }
+    .main{
+        margin: 0 1.25rem;
+    }
+}
