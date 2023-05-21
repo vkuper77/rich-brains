@@ -9,19 +9,22 @@ const SearchPanel = () => {
     const [radioValue, setRadioValue] = useState(OPTIONS_FILTER[0])
     const [tabValue, setTabValue] = useState(TAB_OPTIONS[0])
 
-    return <div className='container _container'>
-        <SearchInput
-            value={value}
-            setValue={setValue}
-            placeholder={'Type to search...'}
-        />
-        <PanelParams
-            radioValue={radioValue}
-            tabValue={tabValue}
-            setRadioValue={setRadioValue}
-            setTabValue={setTabValue}
-        />
-    </div>;
+    return <div className='wrapper-search-filter'>
+        <div className='container _container'>
+            <SearchInput
+                value={value}
+                setValue={setValue}
+                placeholder={'Type to search...'}
+            />
+            <PanelParams
+                radioValue={radioValue}
+                tabValue={tabValue}
+                setRadioValue={setRadioValue}
+                setTabValue={setTabValue}
+            />
+        </div>
+    </div>
+
 };
 
 export default SearchPanel;

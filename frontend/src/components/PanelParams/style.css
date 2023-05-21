@@ -7,6 +7,7 @@
     padding: 0.62rem 0.75rem 0.62rem 0.93rem;
     width: 15.6rem;
     border-radius: 4px;
+    border: 1px solid transparent;
     background-color: var(--color-white);
     justify-content: space-between;
     align-items: center;
@@ -32,6 +33,7 @@
     border-radius: 10px;
     background-color: var(--color-white);
     width: 100%;
+    box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .sort-icon {

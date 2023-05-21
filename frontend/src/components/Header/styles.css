@@ -18,6 +18,14 @@
     padding: 0 2.5rem;
 }
 
+.logo:hover {
+    cursor: pointer;
+}
+
+.logo:active {
+    opacity: 0.9;
+}
+
 .logo img:last-child {
     display: none;
 }

@@ -1,0 +1,10 @@
+.users-wrapper {
+    margin: 0 1.25rem;
+}
+
+.users-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
