@@ -1,8 +1,9 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import './styles.css'
+import Modal from "../UI/Modal/Modal";
 
-const SignInButton = ({signIn}: { signIn: () => void }) => {
-    return <div className='button' onClick={signIn}>
+const SignInButton = ({callback}: { callback: () => void }) => {
+    return <div className='button' onClick={callback}>
         <img alt='icon' className='icon' src={require('../../assets/image/log-in.png')}/>
         <span>Sign in</span>
     </div>
@@ -13,21 +14,34 @@ interface HeaderProps {
 }
 
 const Header = ({routeName = 'Clients'}: HeaderProps) => {
-    const signIn = useCallback(() => {
+    const [showAuth, setShowAuth] = useState<boolean>(false)
+
+    const toggle = useCallback(() => {
+        setShowAuth(p => !p)
     }, [])
+
+    const signIn = useCallback(() => {
+
+    }, [])
+
     return (
-        <div className='wrapper'>
-            <div className='container _content'>
-                <div className='logo'>
-                    <img alt='logo' src={require('../../assets/image/logo-large.png')}/>
-                    <img alt='logo' src={require('../../assets/image/logo-small.png')}/>
-                </div>
-                <div className='main'>
-                    <h2 className='route'>{routeName}</h2>
-                    <SignInButton signIn={signIn}/>
+        <>
+            <div className='wrapper'>
+                <div className='container _content'>
+                    <div className='logo'>
+                        <img alt='logo' src={require('../../assets/image/logo-large.png')}/>
+                        <img alt='logo' src={require('../../assets/image/logo-small.png')}/>
+                    </div>
+                    <div className='main'>
+                        <h2 className='route'>{routeName}</h2>
+                        <SignInButton callback={toggle}/>
+                    </div>
                 </div>
             </div>
-        </div>
+            <Modal isOpen={showAuth} onClose={toggle}>
+                <div>hello</div>
+            </Modal>
+        </>
     );
 };
 
