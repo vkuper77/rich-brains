@@ -36,7 +36,7 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
                 </div>
             </div>
             <Modal isOpen={showAuth} onClose={toggle}>
-                <SignIn/>
+                <SignIn callback={toggle}/>
             </Modal>
         </>
     );

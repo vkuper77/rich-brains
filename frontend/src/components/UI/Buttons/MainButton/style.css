@@ -1,0 +1,27 @@
+.button-custom {
+    width: 100%;
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding: 10px 0;
+    border-radius: 4px;
+}
+
+.button-custom:hover {
+    cursor: pointer;
+}
+
+.button-custom:active {
+    opacity: .7;
+}
+
+.main-button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.secondary-button {
+    background-color: var(--color-white);
+    color: var(--color-light-black);
+}
