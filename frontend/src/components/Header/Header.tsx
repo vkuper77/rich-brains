@@ -1,6 +1,8 @@
 import React, {useCallback, useState} from 'react';
-import './styles.css'
 import Modal from "../UI/Modal/Modal";
+import SignIn from "../SignIn/SignIn";
+import {useAppContext} from "../../context/app/context";
+import './styles.css'
 
 const SignInButton = ({callback}: { callback: () => void }) => {
     return <div className='button' onClick={callback}>
@@ -15,13 +17,10 @@ interface HeaderProps {
 
 const Header = ({routeName = 'Clients'}: HeaderProps) => {
     const [showAuth, setShowAuth] = useState<boolean>(false)
+    const app = useAppContext()
 
     const toggle = useCallback(() => {
         setShowAuth(p => !p)
-    }, [])
-
-    const signIn = useCallback(() => {
-
     }, [])
 
     return (
@@ -39,7 +38,8 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
                 </div>
             </div>
             <Modal isOpen={showAuth} onClose={toggle}>
-                <div>hello</div>
+                <SignIn/>
+                <div onClick={app!.signIn}>2222</div>
             </Modal>
         </>
     );
