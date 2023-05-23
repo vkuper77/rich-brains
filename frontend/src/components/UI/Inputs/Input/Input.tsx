@@ -7,9 +7,10 @@ interface InputProps {
     value?: string
     placeholder?: string
     handleChange?: (event: ChangeEvent<HTMLInputElement>) => void
+    style?: React.CSSProperties
 }
 
-const Input = ({type = '', placeholder, value = '', id = '', handleChange = () => undefined}: InputProps) => {
+const Input = ({type = '', placeholder, value = '', id = '', handleChange = () => undefined, style = {}}: InputProps) => {
     return (
         <input
             className="input-custom"
@@ -19,6 +20,7 @@ const Input = ({type = '', placeholder, value = '', id = '', handleChange = () =
             onChange={handleChange}
             required
             placeholder={placeholder}
+            style={style}
         />
     );
 };

@@ -5,6 +5,7 @@ import './styles.css'
 import SignOut from "../SignOut/SignOut";
 import DeleteOverlay from "../DeleteOverlay/DeleteOverlay";
 import PreviewClient from "../PreviewClient/PreviewClient";
+import AddEditClient from "../AddEditClient/AddEditClient";
 
 const SignInButton = ({callback}: { callback: () => void }) => {
     return <div className='button' onClick={callback}>
@@ -47,8 +48,11 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
             {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
             {/*    <SignOut callback={toggle}/>*/}
             {/*</Modal>*/}
+            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
+            {/*    <PreviewClient callback={toggle} />*/}
+            {/*</Modal>*/}
             <Modal isOpen={showAuth} onClose={toggle}>
-                <PreviewClient callback={toggle} />
+                <AddEditClient callback={toggle} />
             </Modal>
         </>
     );
