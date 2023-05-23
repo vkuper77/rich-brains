@@ -1,4 +1,4 @@
-.sign-wrapper {
+.sign-out-wrapper {
     position: relative;
     background-color: var(--color-white);
     padding: 3.75rem 4.37rem;
@@ -6,7 +6,11 @@
     height: 100%;
 }
 
-.sign-title {
+.sign-out-container {
+    width: 310px;
+}
+
+.sign-out-title {
     font-family: 'proxima-nova', sans-serif;
     font-weight: 700;
     color: var(--color-black);
@@ -16,23 +20,20 @@
     margin-bottom: 2.5rem;
 }
 
-.sign-form {
-    width: 310px;
+.sign-out-text {
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 400;
+    color: var(--color-light-black);
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
 }
 
 .cross-icon {
     position: absolute;
     top: 20px;
     right: 20px;
-}
-
-.show-icon {
-    position: absolute;
-    top: 0;
-    right: 15px;
-    height: 100%;
-    display: flex;
-    align-items: center;
 }
 
 .cross-icon:hover, .show-icon:hover {
@@ -42,19 +43,3 @@
 .cross-icon:active, .show-icon:hover {
     opacity: 0.7;
 }
-
-
-@media (max-width:500px) {
-    .sign-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 30px;
-    }
-
-    .sign-form {
-        width: 100%;
-    }
-}
-
-

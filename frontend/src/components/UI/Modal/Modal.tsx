@@ -24,7 +24,7 @@ const Modal = ({isOpen, onClose, children}: ModalProps) => {
             style={overlayStyles}
             onClick={onClose}
         >
-            <div onClick={handleClick}>
+            <div className='modal-container' onClick={handleClick}>
                 {children}
             </div>
         </div>

@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Modal from "../UI/Modal/Modal";
 import SignIn from "../SignIn/SignIn";
 import './styles.css'
+import SignOut from "../SignOut/SignOut";
 
 const SignInButton = ({callback}: { callback: () => void }) => {
     return <div className='button' onClick={callback}>
@@ -38,6 +39,9 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
             <Modal isOpen={showAuth} onClose={toggle}>
                 <SignIn callback={toggle}/>
             </Modal>
+            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
+            {/*    <SignOut callback={toggle}/>*/}
+            {/*</Modal>*/}
         </>
     );
 };

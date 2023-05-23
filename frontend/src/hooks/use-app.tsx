@@ -5,5 +5,11 @@ export default () => {
     const signIn = useCallback(async () => {
         console.log('signIn')
     }, [])
-    return { signIn }
+
+    /** Sign Out */
+    const signOut = useCallback(async () => {
+        console.log('signOut')
+    }, [])
+
+    return { signIn, signOut }
 };
