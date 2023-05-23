@@ -1,9 +1,13 @@
 import React from 'react';
 import './style.css'
 
-const DeleteButton = () => {
+interface DeleteButtonProps {
+    callback: () => void
+}
+
+const DeleteButton = ({callback}: DeleteButtonProps) => {
     return (
-        <div className='button-container'>
+        <div onClick={callback} className='button-container'>
             <img alt='icon' src={require('../../../../assets/image/trash.png')} />
             <span>Delete client</span>
         </div>

@@ -1,14 +1,13 @@
-import React, {useCallback, useState} from 'react';
-import Modal from "../UI/Modal/Modal";
-import SignIn from "../SignIn/SignIn";
+import React from 'react';
 import './styles.css'
-import SignOut from "../SignOut/SignOut";
-import DeleteOverlay from "../DeleteOverlay/DeleteOverlay";
-import PreviewClient from "../PreviewClient/PreviewClient";
-import AddEditClient from "../AddEditClient/AddEditClient";
+import {useModalContext} from "../../context/modal-desk/context";
+import {ModalType} from "../../costansts/type-modal";
 
-const SignInButton = ({callback}: { callback: () => void }) => {
-    return <div className='button' onClick={callback}>
+const SignInButton = () => {
+    const {open} = useModalContext()
+    return <div className='button' onClick={() => {
+        open({type: ModalType.SignIn, data: {}})
+    }}>
         <img alt='icon' className='icon' src={require('../../assets/image/log-in.png')}/>
         <span>Sign in</span>
     </div>
@@ -19,12 +18,6 @@ interface HeaderProps {
 }
 
 const Header = ({routeName = 'Clients'}: HeaderProps) => {
-    const [showAuth, setShowAuth] = useState<boolean>(false)
-
-    const toggle = useCallback(() => {
-        setShowAuth(p => !p)
-    }, [])
-
     return (
         <>
             <div className='wrapper'>
@@ -35,25 +28,10 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
                     </div>
                     <div className='main'>
                         <h2 className='route'>{routeName}</h2>
-                        <SignInButton callback={toggle}/>
+                        <SignInButton/>
                     </div>
                 </div>
             </div>
-            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
-            {/*    <SignIn callback={toggle}/>*/}
-            {/*</Modal>*/}
-            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
-            {/*    <DeleteOverlay callback={toggle}/>*/}
-            {/*</Modal>*/}
-            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
-            {/*    <SignOut callback={toggle}/>*/}
-            {/*</Modal>*/}
-            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
-            {/*    <PreviewClient callback={toggle} />*/}
-            {/*</Modal>*/}
-            <Modal isOpen={showAuth} onClose={toggle}>
-                <AddEditClient callback={toggle} />
-            </Modal>
         </>
     );
 };

@@ -4,12 +4,15 @@ import '../SignOut/style.css'
 import './style.css'
 import EditButton from "../UI/Buttons/EditButton/EditButton";
 import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
+import {useModalContext} from "../../context/modal-desk/context";
+import {ModalType} from "../../costansts/type-modal";
 
 interface PreviewClientProps {
     callback: () => void
 }
 
 const PreviewClient = ({callback}: PreviewClientProps) => {
+    const {open, setPrevScreen} = useModalContext()
     return (
         <div className='preview-wrapper'>
             <div onClick={callback} className='cross-icon'>
@@ -17,8 +20,14 @@ const PreviewClient = ({callback}: PreviewClientProps) => {
             </div>
             <div className='preview-container'>
                 <div className='preview-container-buttons'>
-                    <EditButton/>
-                    <DeleteButton/>
+                    <EditButton callback={() => {
+                        setPrevScreen()
+                        open({type: ModalType.AddEditClient, data: null})
+                    }}/>
+                    <DeleteButton callback={() => {
+                        setPrevScreen()
+                        open({type: ModalType.DeleteClient, data: null})
+                    }}/>
                 </div>
                 <img alt='avatar' className='preview-avatar' src={require('../../assets/image/avatar.png')}/>
                 <h3 className="preview-title">Arlene McCoy</h3>

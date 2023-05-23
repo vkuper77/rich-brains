@@ -3,12 +3,14 @@ import './style.css'
 import '../SignOut/style.css'
 import MainButton from "../UI/Buttons/MainButton/MainButton";
 import Input from "../UI/Inputs/Input/Input";
+import {useModalContext} from "../../context/modal-desk/context";
 
 interface AddEditClientProps {
     callback: () => void
 }
 
 const AddEditClient = ({callback}: AddEditClientProps) => {
+    const {open, prevScreen} = useModalContext()
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [birthday, setBirthday] = useState<string>('')
@@ -83,7 +85,7 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                             type='button'
                             text='Cancel'
                             styleButton='secondary-button'
-                            callback={callback}
+                            callback={() => open(prevScreen)}
                         />
                     </div>
                 </div>

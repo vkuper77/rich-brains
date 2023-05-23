@@ -1,9 +1,14 @@
 import React from 'react';
 import './style.css'
+import {useModalContext} from "../../context/modal-desk/context";
+import {ModalType} from "../../costansts/type-modal";
 
 const Card = ({user}: { user: any }) => {
+    const {open} = useModalContext()
     return (
-        <div className='card'>
+        <div onClick={() => {
+            open({type: ModalType.PreviewClient, data: null})
+        }} className='card'>
             <img
                 alt='avatar'
                 className='card-avatar'

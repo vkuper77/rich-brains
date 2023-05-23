@@ -3,13 +3,15 @@ import './App.css';
 import Header from "./components/Header/Header";
 import SearchPanel from "./components/SearchPanel/SearchPanel";
 import Users from "./components/Users/Users";
+import ModalDesk from "./components/ModalDesk/ModalDesk";
 
 function App() {
     return (
         <>
-            <Header/>
-            <SearchPanel/>
-            <Users/>
+            <Header />
+            <SearchPanel />
+            <Users />
+            <ModalDesk />
         </>
     );
 }

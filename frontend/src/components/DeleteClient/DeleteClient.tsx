@@ -2,13 +2,15 @@ import React from 'react';
 import MainButton from "../UI/Buttons/MainButton/MainButton";
 import './../SignOut/style.css'
 import {useAppContext} from "../../context/app/context";
+import {useModalContext} from "../../context/modal-desk/context";
 
-interface DeleteOverlayProps {
+interface DeleteClientProps {
     callback: () => void
 }
 
-const DeleteOverlay = ({callback = () => undefined}: DeleteOverlayProps) => {
+const DeleteClient = ({callback = () => undefined}: DeleteClientProps) => {
     const app = useAppContext()
+    const {open, prevScreen } = useModalContext()
     return (
         <div className='sign-out-wrapper'>
             <div onClick={callback} className='cross-icon'>
@@ -25,10 +27,12 @@ const DeleteOverlay = ({callback = () => undefined}: DeleteOverlayProps) => {
                         callback={app?.deleteClient}
                     />
                 </div>
-                <MainButton type='button' text='No, close' styleButton='secondary-button' callback={callback}/>
+                <MainButton type='button' text='No, close' styleButton='secondary-button' callback={() => {
+                    open(prevScreen)
+                }}/>
             </div>
         </div>
     );
 };
 
-export default DeleteOverlay;
+export default DeleteClient;
