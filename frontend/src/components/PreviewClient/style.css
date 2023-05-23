@@ -1,0 +1,52 @@
+.preview-wrapper {
+    position: relative;
+    background-color: var(--color-white);
+    padding: 3.75rem 4.37rem;
+}
+
+.preview-container {
+    width: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-avatar {
+    width: 200px;
+    height: 210px;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.preview-title {
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 2.62rem;
+    margin-bottom: 1.25rem;
+}
+
+.preview-button {
+    background-color: transparent;
+    font-family: 'proxima-nova', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    color: var(--color-light-black);
+    padding: 10px 30px;
+    margin-top: 2.5rem;
+}
+
+.preview-button:hover {
+    cursor: pointer;
+}
+
+.preview-button:active {
+    opacity: 0.7;
+}
+
+.preview-container-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
