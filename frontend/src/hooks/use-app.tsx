@@ -11,5 +11,10 @@ export default () => {
         console.log('signOut')
     }, [])
 
-    return { signIn, signOut }
+    /** Delete User */
+    const deleteClient = useCallback(async () => {
+        console.log('deleteClient')
+    }, [])
+
+    return { signIn, signOut, deleteClient }
 };

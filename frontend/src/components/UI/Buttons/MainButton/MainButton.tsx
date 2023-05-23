@@ -4,7 +4,7 @@ import './style.css'
 interface MainButtonProps {
     type?: "button" | "submit" | "reset" | undefined
     text?: string
-    styleButton?: 'main-button' | 'secondary-button'
+    styleButton?: 'main-button' | 'secondary-button' | 'main-danger'
     callback?: () => void
 }
 

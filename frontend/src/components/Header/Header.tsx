@@ -3,6 +3,7 @@ import Modal from "../UI/Modal/Modal";
 import SignIn from "../SignIn/SignIn";
 import './styles.css'
 import SignOut from "../SignOut/SignOut";
+import DeleteOverlay from "../DeleteOverlay/DeleteOverlay";
 
 const SignInButton = ({callback}: { callback: () => void }) => {
     return <div className='button' onClick={callback}>
@@ -36,8 +37,11 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
                     </div>
                 </div>
             </div>
+            {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
+            {/*    <SignIn callback={toggle}/>*/}
+            {/*</Modal>*/}
             <Modal isOpen={showAuth} onClose={toggle}>
-                <SignIn callback={toggle}/>
+                <DeleteOverlay callback={toggle}/>
             </Modal>
             {/*<Modal isOpen={showAuth} onClose={toggle}>*/}
             {/*    <SignOut callback={toggle}/>*/}
