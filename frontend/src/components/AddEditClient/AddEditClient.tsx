@@ -5,18 +5,22 @@ import MainButton from "../UI/Buttons/MainButton/MainButton";
 import Input from "../UI/Inputs/Input/Input";
 import {useModalContext} from "../../context/modal-desk/context";
 import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
+import {useAppContext} from "../../context/app/context";
 
 interface AddEditClientProps {
     callback: () => void
 }
 
 const AddEditClient = ({callback}: AddEditClientProps) => {
-    const {state:{data}, open, prevScreen} = useModalContext()
+    const {state: {data}, open, prevScreen} = useModalContext()
+
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [birthday, setBirthday] = useState<string>('')
     const [country, setCountry] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
+
+    const app = useAppContext()
 
     const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setFirstName(event.target.value)
@@ -38,12 +42,17 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
         setPhone(event.target.value)
     }
 
+    const submit = async (e: ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        await app?.addClient({name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
+    }
+
     return (
         <div className='client-wrapper'>
             <div onClick={callback} className='cross-icon'>
                 <img alt='cross' src={require('../../assets/image/close.png')}/>
             </div>
-            <form className='client-container'>
+            <form className='client-container' onSubmit={submit}>
                 <h2 className='client-card-title'>{data.isNew ? 'New client' : 'Edit client'}</h2>
                 <div className='client-container-info'>
                     <img alt='avatar' className='client-avatar' src={require('../../assets/image/avatar.png')}/>
@@ -91,7 +100,8 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                             />
                         </div>
                     </div>
-                    {!data.isNew && <DeleteButton callback={() => {}}/>}
+                    {!data.isNew && <DeleteButton callback={() => {
+                    }}/>}
                 </div>
             </form>
         </div>

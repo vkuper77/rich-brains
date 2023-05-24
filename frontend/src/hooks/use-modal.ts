@@ -5,12 +5,12 @@ const initState = {type: null, data: null}
 
 export default function useModal() {
     const [modal, setModal] = useState<StateModal>(initState)
-    const prevModalRef = useRef<StateModal>(initState);
+    const prevOrNextScreenRef = useRef<StateModal>(initState);
 
     /**Close modal*/
     const close = useCallback(() => {
         setModal(initState)
-        prevModalRef.current = initState
+        prevOrNextScreenRef.current = initState
     }, [])
 
     /** Open modal */
@@ -20,8 +20,13 @@ export default function useModal() {
 
     /** Save prev screen */
     const setPrevScreen = useCallback(() => {
-        prevModalRef.current = modal
+        prevOrNextScreenRef.current = modal
     }, [modal])
 
-    return {state: modal, close, open, setPrevScreen, prevScreen: prevModalRef.current}
+    /** Save next screen */
+    const setNextScreen = useCallback((data: any) => {
+        prevOrNextScreenRef.current = data
+    }, [])
+
+    return {state: modal, close, open, setPrevScreen, setNextScreen, prevScreen: prevOrNextScreenRef.current}
 }

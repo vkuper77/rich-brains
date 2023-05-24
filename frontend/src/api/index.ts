@@ -22,8 +22,8 @@ export class AppApi {
         return await instance.post(`clients/get`, {id})
     }
 
-    static async addClient({name, surname, age, phone}: { name: string, surname: string, age: number, phone: string }) {
-        return await instance.post(`clients/add`, {name, surname, age, phone})
+    static async addClient(data: AddClientParams) {
+        return await instance.post(`clients/add`, {...data})
     }
 
     static async editClient({name, surname, age, phone, id}: { name: string, surname: string, age: number, phone: string, id: number }) {
@@ -34,3 +34,5 @@ export class AppApi {
         return await instance.delete(`clients/remove?id=${id}`)
     }
 }
+
+export type AddClientParams = { name: string, surname: string, age: number, phone: string , country: string}

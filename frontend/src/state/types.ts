@@ -10,6 +10,7 @@ export enum StoreActions {
     LOGIN = 'LOGIN',
     LOGOUT = 'LOGOUT',
     SET_CLIENTS = 'SET_CLIENTS',
+    ADD_CLIENT = 'ADD_CLIENT',
 }
 
 export type Client = {

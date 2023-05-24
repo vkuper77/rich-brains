@@ -24,6 +24,10 @@ export const reducer = (state: State, {type, payload}: Action): State => {
             return produce(state, (draft) => {
                 draft.clients = payload
             })
+        case StoreActions.ADD_CLIENT:
+            return produce(state, (draft) => {
+                draft.clients.push(payload)
+            })
         default:
             return state;
     }

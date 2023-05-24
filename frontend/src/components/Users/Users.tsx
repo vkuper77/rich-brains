@@ -8,10 +8,14 @@ import {Client} from "../../state/types";
 
 const Users = () => {
     const { state } = useStateContext()
-    const {open} = useModalContext()
+    const { open, setNextScreen} = useModalContext()
 
     const onPressCard = useCallback((client: Client) => {
-        if(!state.isAuthenticated) return
+        if(!state.isAuthenticated) {
+            open({type: ModalType.SignIn})
+            setNextScreen({type: ModalType.PreviewClient, data: client})
+            return
+        }
         open({type: ModalType.PreviewClient, data: client})
     }, [state])
 

@@ -22,8 +22,8 @@ type DeskType = { [key in ModalType]: React.FC<ModalContentProps> } & { 0: React
 
 const Desk: DeskType = {
     [ModalType.SignIn]: (p) => <SignIn {...p} />,
-    [ModalType.DeleteClient]: (p ) => <DeleteClient {...p} />,
     [ModalType.SignOut]: (p ) => <SignOut {...p} />,
+    [ModalType.DeleteClient]: (p ) => <DeleteClient {...p} />,
     [ModalType.PreviewClient]: (p ) => <PreviewClient {...p} />,
     [ModalType.AddEditClient]: (p ) => <AddEditClient {...p} />,
     [0]: () => null
