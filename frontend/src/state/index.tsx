@@ -32,6 +32,10 @@ export const reducer = (state: State, {type, payload}: Action): State => {
             return produce(state, (draft) => {
                 draft.clients = draft.clients.map(client => client.id === payload.id ? payload : client)
             })
+        case StoreActions.DELETE_CLIENT:
+            return produce(state, (draft) => {
+                draft.clients = draft.clients.filter(client => client.id !== payload.id)
+            })
         default:
             return state;
     }

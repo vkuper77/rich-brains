@@ -30,7 +30,7 @@ export class AppApi {
         return await instance.put(`clients/edit`, {...data})
     }
 
-    static async deleteClient({id}: { id: number }) {
+    static async deleteClient({id}: { id: string }) {
         return await instance.delete(`clients/remove?id=${id}`)
     }
 }

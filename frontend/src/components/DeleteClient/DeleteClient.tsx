@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import MainButton from "../UI/Buttons/MainButton/MainButton";
 import './../SignOut/style.css'
 import {useAppContext} from "../../context/app/context";
@@ -10,7 +10,10 @@ interface DeleteClientProps {
 
 const DeleteClient = ({callback = () => undefined}: DeleteClientProps) => {
     const app = useAppContext()
-    const {open, prevScreen } = useModalContext()
+    const {state, open, prevScreen } = useModalContext()
+    const onPressDelete = useCallback(async () => {
+        await app?.deleteClient(state.data.id)
+    },[])
     return (
         <div className='sign-out-wrapper'>
             <div onClick={callback} className='cross-icon'>
@@ -24,7 +27,7 @@ const DeleteClient = ({callback = () => undefined}: DeleteClientProps) => {
                         type='button'
                         text='Yes, delete'
                         styleButton='main-danger'
-                        callback={app?.deleteClient}
+                        callback={onPressDelete}
                     />
                 </div>
                 <MainButton type='button' text='No, close' styleButton='secondary-button' callback={() => {

@@ -12,6 +12,7 @@ export enum StoreActions {
     SET_CLIENTS = 'SET_CLIENTS',
     ADD_CLIENT = 'ADD_CLIENT',
     EDIT_CLIENT = 'EDIT_CLIENT',
+    DELETE_CLIENT = 'DELETE_CLIENT',
 }
 
 export type Client = {

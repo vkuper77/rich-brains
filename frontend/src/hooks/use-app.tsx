@@ -70,15 +70,23 @@ export default () => {
             dispatch({type: StoreActions.EDIT_CLIENT, payload: resp.client})
         } catch (e) {
             alert(e)
-            console.error('[addClient]:', e)
+            console.error('[editClient]:', e)
         } finally {
             closeModal()
         }
     }, [])
 
     /** Delete Client */
-    const deleteClient = useCallback(async () => {
-        console.log('deleteClient')
+    const deleteClient = useCallback(async (id: string) => {
+        try {
+            await AppApi.deleteClient({id})
+            dispatch({type: StoreActions.DELETE_CLIENT, payload: {id}})
+        } catch (e) {
+            alert(e)
+            console.error('[deleteClient]:', e)
+        } finally {
+            closeModal()
+        }
     }, [])
 
     return {signIn, signOut, getClients, addClient, editClient, deleteClient}
