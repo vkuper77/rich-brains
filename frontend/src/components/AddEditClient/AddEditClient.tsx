@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import './style.css'
 import '../SignOut/style.css'
 import MainButton from "../UI/Buttons/MainButton/MainButton";
@@ -6,19 +6,20 @@ import Input from "../UI/Inputs/Input/Input";
 import {useModalContext} from "../../context/modal-desk/context";
 import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
 import {useAppContext} from "../../context/app/context";
+import {ModalType} from "../../costansts/type-modal";
 
 interface AddEditClientProps {
     callback: () => void
 }
 
 const AddEditClient = ({callback}: AddEditClientProps) => {
-    const {state: {data}, open, prevScreen} = useModalContext()
+    const {state: {data}, open, setPrevScreen, prevScreen} = useModalContext()
 
-    const [firstName, setFirstName] = useState<string>('')
-    const [lastName, setLastName] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>(data?.name ?? '')
+    const [lastName, setLastName] = useState<string>(data?.surname ?? '')
     const [birthday, setBirthday] = useState<string>('')
-    const [country, setCountry] = useState<string>('')
-    const [phone, setPhone] = useState<string>('')
+    const [country, setCountry] = useState<string>(data?.country ?? '')
+    const [phone, setPhone] = useState<string>(data?.phone ?? '')
 
     const app = useAppContext()
 
@@ -44,8 +45,17 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
 
     const submit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        await app?.addClient({name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
+        if(data.isNew){
+            await app?.addClient({name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
+        } else if(!data.isNew) {
+            await app?.editClient({id: data.id, name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
+        }
     }
+
+    const onPressDelete = useCallback(() => {
+        setPrevScreen()
+        open({type: ModalType.DeleteClient, data: {id: data.id}})
+    }, [])
 
     return (
         <div className='client-wrapper'>
@@ -100,8 +110,7 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                             />
                         </div>
                     </div>
-                    {!data.isNew && <DeleteButton callback={() => {
-                    }}/>}
+                    {!data.isNew && <DeleteButton callback={onPressDelete}/>}
                 </div>
             </form>
         </div>

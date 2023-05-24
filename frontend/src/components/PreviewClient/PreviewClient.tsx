@@ -16,12 +16,12 @@ const PreviewClient = ({callback}: PreviewClientProps) => {
 
     const onPressEdit = useCallback(() => {
         setPrevScreen()
-        open({type: ModalType.AddEditClient, data: {isNew: false}})
+        open({type: ModalType.AddEditClient, data: {...state.data, isNew: false}})
     }, [])
 
     const onPressDelete = useCallback(() => {
         setPrevScreen()
-        open({type: ModalType.DeleteClient, data: null})
+        open({type: ModalType.DeleteClient, data: {id: state.data.id}})
     }, [])
 
     return (

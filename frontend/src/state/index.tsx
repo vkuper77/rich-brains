@@ -28,8 +28,11 @@ export const reducer = (state: State, {type, payload}: Action): State => {
             return produce(state, (draft) => {
                 draft.clients.push(payload)
             })
+        case StoreActions.EDIT_CLIENT:
+            return produce(state, (draft) => {
+                draft.clients = draft.clients.map(client => client.id === payload.id ? payload : client)
+            })
         default:
             return state;
     }
 };
-

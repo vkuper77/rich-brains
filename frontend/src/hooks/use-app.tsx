@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useModalContext} from "../context/modal-desk/context";
-import {AddClientParams, AppApi, AuthApi} from "../api";
+import {AddClientParams, AppApi, AuthApi, EditClientParams} from "../api";
 import {useStateContext} from "../context/state/context";
 import {StoreActions} from "../state/types";
 
@@ -63,10 +63,23 @@ export default () => {
         }
     }, [])
 
+    /** Edit Client */
+    const editClient = useCallback(async (data: EditClientParams) => {
+        try {
+            const resp = await AppApi.editClient(data)
+            dispatch({type: StoreActions.EDIT_CLIENT, payload: resp.client})
+        } catch (e) {
+            alert(e)
+            console.error('[addClient]:', e)
+        } finally {
+            closeModal()
+        }
+    }, [])
+
     /** Delete Client */
     const deleteClient = useCallback(async () => {
         console.log('deleteClient')
     }, [])
 
-    return {signIn, signOut, getClients, addClient, deleteClient}
+    return {signIn, signOut, getClients, addClient, editClient, deleteClient}
 };

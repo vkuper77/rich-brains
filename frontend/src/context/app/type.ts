@@ -1,4 +1,4 @@
-import {AddClientParams} from "../../api";
+import {AddClientParams, EditClientParams} from "../../api";
 
 export interface AppContextValue {
     signIn(): Promise<void>
@@ -6,4 +6,5 @@ export interface AppContextValue {
     deleteClient(): Promise<void>
     getClients(): Promise<void>
     addClient(p: AddClientParams): Promise<void>
+    editClient(p: EditClientParams): Promise<void>
 }
