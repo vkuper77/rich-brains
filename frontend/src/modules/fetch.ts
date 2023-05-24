@@ -1,3 +1,5 @@
+import {KeysLocalStorage} from "../costansts/keys-local-storage";
+
 export class FetchConstructor {
     private readonly baseUrl: string;
 
@@ -55,15 +57,15 @@ export class FetchConstructor {
     }
 
     private getTokenFromLocalStorage(): string | null {
-        return localStorage.getItem('token');
+        return localStorage.getItem(KeysLocalStorage.TOKEN);
     }
 
     setTokenToLocalStorage(token: string): void {
-        localStorage.setItem('token', token);
+        localStorage.setItem(KeysLocalStorage.TOKEN, token);
     }
 
     removeTokenFromLocalStorage(): void {
-        localStorage.removeItem('token');
+        localStorage.removeItem(KeysLocalStorage.TOKEN);
     }
 
     private async handleResponse(response: Response): Promise<any> {

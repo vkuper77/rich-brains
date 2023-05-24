@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useModalContext} from "../context/modal-desk/context";
-import {AddClientParams, AppApi, AuthApi, EditClientParams} from "../api";
+import {AddClientParams, AppApi, AuthApi, EditClientParams, SignInParams} from "../api";
 import {useStateContext} from "../context/state/context";
 import {StoreActions} from "../state/types";
 
@@ -9,9 +9,9 @@ export default () => {
     const {dispatch} = useStateContext()
 
     /** Sign In User to App */
-    const signIn = useCallback(async () => {
+    const signIn = useCallback(async (data: SignInParams) => {
         try {
-            const response = await AuthApi.signIn({login: 'richbrains', password: 'richbrains_test'})
+            const response = await AuthApi.signIn(data)
             dispatch({type: StoreActions.LOGIN, payload: {login: response.login}})
             /** if the card has been pressed but is not authorized */
             if (prevScreen) {

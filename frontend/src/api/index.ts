@@ -1,14 +1,17 @@
 import {instance} from "./instance";
+import {KeysLocalStorage} from "../costansts/keys-local-storage";
 
 export class AuthApi {
-    static async signIn({login, password}: { login: string, password: string }) {
+    static async signIn({login, password}: SignInParams) {
         const response = await instance.post(`user/login`, {login, password})
         instance.setTokenToLocalStorage(response.token);
+        localStorage.setItem(KeysLocalStorage.USER, JSON.stringify({login, password}))
         return response
     }
 
     static signOut() {
         instance.removeTokenFromLocalStorage()
+        localStorage.removeItem(KeysLocalStorage.USER);
     }
 }
 
@@ -33,6 +36,11 @@ export class AppApi {
     static async deleteClient({id}: { id: string }) {
         return await instance.delete(`clients/remove?id=${id}`)
     }
+}
+
+export type SignInParams = {
+    login: string,
+    password: string
 }
 
 export type AddClientParams = {

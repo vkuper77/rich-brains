@@ -23,9 +23,9 @@ const SignIn = ({callback}: SignInProps) => {
     }
 
     const handleSubmit = (event: FormEvent) => {
-        if (!username.length || !username.length) return
+        if (!username.length || !password.length) return
         event.preventDefault()
-        app!.signIn()
+        app!.signIn({login: username, password})
     }
 
     return (
