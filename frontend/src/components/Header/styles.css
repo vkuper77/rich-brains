@@ -73,6 +73,28 @@
     margin-right: 7px;
 }
 
+.user-container {
+    display: flex;
+    align-items: center;
+}
+
+.user-container:hover {
+    cursor: pointer;
+}
+
+.user-container:active {
+    opacity: 0.7;
+}
+
+.user-container > span {
+    display: block;
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin: 0 7px;
+}
+
 @media(max-width: 500px) {
     .button {
         padding: 0.65rem;

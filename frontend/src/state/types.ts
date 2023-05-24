@@ -1,7 +1,8 @@
-export type Action = { type: string, payload: any }
+export type Action = { type: string, payload?: any }
 
 export interface State {
     isAuthenticated: boolean;
+    user: { login: string } | null
     clients: string[];
 }
 

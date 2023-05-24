@@ -3,7 +3,7 @@ import {instance} from "./instance";
 export class AuthApi {
     static async signIn({login, password}: { login: string, password: string }) {
         const response = await instance.post(`user/login`, {login, password})
-        instance.setTokenToLocalStorage('')
+        instance.setTokenToLocalStorage(response.token);
         return response
     }
 
