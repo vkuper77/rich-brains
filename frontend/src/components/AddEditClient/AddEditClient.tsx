@@ -4,13 +4,14 @@ import '../SignOut/style.css'
 import MainButton from "../UI/Buttons/MainButton/MainButton";
 import Input from "../UI/Inputs/Input/Input";
 import {useModalContext} from "../../context/modal-desk/context";
+import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
 
 interface AddEditClientProps {
     callback: () => void
 }
 
 const AddEditClient = ({callback}: AddEditClientProps) => {
-    const {open, prevScreen} = useModalContext()
+    const {state:{data}, open, prevScreen} = useModalContext()
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
     const [birthday, setBirthday] = useState<string>('')
@@ -43,7 +44,7 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                 <img alt='cross' src={require('../../assets/image/close.png')}/>
             </div>
             <form className='client-container'>
-                <h2 className='client-card-title'>New client</h2>
+                <h2 className='client-card-title'>{data.isNew ? 'New client' : 'Edit client'}</h2>
                 <div className='client-container-info'>
                     <img alt='avatar' className='client-avatar' src={require('../../assets/image/avatar.png')}/>
                     <div className='client-container-inputs'>
@@ -76,18 +77,21 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                         </label>
                     </div>
                 </div>
-                <div style={{display: 'flex'}}>
-                    <div style={{width: '100px', marginRight: '10px'}}>
-                        <MainButton type='submit' text='Save' styleButton='main-button'/>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <div style={{display: 'flex'}}>
+                        <div style={{width: '100px', marginRight: '10px'}}>
+                            <MainButton type='submit' text='Save' styleButton='main-button'/>
+                        </div>
+                        <div style={{width: '100px'}}>
+                            <MainButton
+                                type='button'
+                                text='Cancel'
+                                styleButton='secondary-button'
+                                callback={() => open(prevScreen)}
+                            />
+                        </div>
                     </div>
-                    <div style={{width: '100px'}}>
-                        <MainButton
-                            type='button'
-                            text='Cancel'
-                            styleButton='secondary-button'
-                            callback={() => open(prevScreen)}
-                        />
-                    </div>
+                    {!data.isNew && <DeleteButton callback={() => {}}/>}
                 </div>
             </form>
         </div>

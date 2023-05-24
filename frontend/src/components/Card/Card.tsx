@@ -1,14 +1,12 @@
 import React from 'react';
 import './style.css'
-import {useModalContext} from "../../context/modal-desk/context";
-import {ModalType} from "../../costansts/type-modal";
+import { Client } from '../../state/types';
 
-const Card = ({user}: { user: any }) => {
-    const {open} = useModalContext()
+interface CardProps { user: Client, callback(client: Client): void  }
+
+const Card = ({user, callback}: CardProps) => {
     return (
-        <div onClick={() => {
-            open({type: ModalType.PreviewClient, data: null})
-        }} className='card'>
+        <div onClick={ () => callback(user)} className='card'>
             <img
                 alt='avatar'
                 className='card-avatar'

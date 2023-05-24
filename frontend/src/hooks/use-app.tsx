@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {useModalContext} from "../context/modal-desk/context";
-import {AuthApi} from "../api";
+import {AppApi, AuthApi} from "../api";
 import {useStateContext} from "../context/state/context";
 import {StoreActions} from "../state/types";
 
@@ -39,5 +39,16 @@ export default () => {
         console.log('deleteClient')
     }, [])
 
-    return { signIn, signOut, deleteClient }
+    /** Get Clients */
+    const getClients = useCallback(async () => {
+        try {
+            const resp = await AppApi.getClients()
+            dispatch({type: StoreActions.SET_CLIENTS, payload: resp.clients})
+        } catch (e) {
+            alert(e)
+            console.error('[getClients]:', e)
+        }
+    }, [])
+
+    return { signIn, signOut, deleteClient, getClients }
 };

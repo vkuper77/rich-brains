@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Card from "../Card/Card";
 import './style.css'
-
-const DATA = new Array(10).fill('').map((_, idx) => ({
-    "name": "alexey" + idx,
-    "surname": "shkut" + idx,
-    "age": 25 + idx,
-    "phone": "+375297428416",
-    "id": idx,
-    "country": "balarus"
-}))
+import {useStateContext} from "../../context/state/context";
+import {useModalContext} from "../../context/modal-desk/context";
+import {ModalType} from "../../costansts/type-modal";
+import {Client} from "../../state/types";
 
 const Users = () => {
+    const { state } = useStateContext()
+    const {open} = useModalContext()
+
+    const onPressCard = useCallback((client: Client) => {
+        if(!state.isAuthenticated) return
+        open({type: ModalType.PreviewClient, data: client})
+    }, [state])
+
     return (
         <div className='users-wrapper'>
             <div className='users-container _container'>
-                {DATA.map((item) => <Card key={item.id} user={item}/>)}
+                {state.clients.map((item) => <Card callback={onPressCard} key={item.id} user={item}/>)}
             </div>
         </div>
     );

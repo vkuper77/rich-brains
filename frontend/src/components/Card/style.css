@@ -12,6 +12,7 @@
 
 .card:hover {
     cursor: pointer;
+    background-color: #F8F9FF;
 }
 
 .card:active {
