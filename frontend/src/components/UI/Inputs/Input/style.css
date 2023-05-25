@@ -1,0 +1,16 @@
+.input-custom {
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding: 10px 15px;
+    border: 1px solid rgba(38, 38, 38, 0.12);
+    width: 100%;
+    border-radius: 4px;
+}
+
+.input-custom:focus {
+    outline: none;
+    border: 1px solid var(--color-primary);
+}
+

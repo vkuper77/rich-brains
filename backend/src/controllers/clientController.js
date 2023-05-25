@@ -35,8 +35,8 @@ exports.getUser = (request, response) => {
 
 
 exports.editUser = (request, response) => {
-    const {name, surname, age, phone, id} = request.body;
-    const isEmptyParam = Client.checkParams(response, {name, surname, age, phone, id});
+    const {name, surname, age, phone, country, id} = request.body;
+    const isEmptyParam = Client.checkParams(response, {name, surname, age, phone, country, id});
     if (isEmptyParam) {
         return
     }
