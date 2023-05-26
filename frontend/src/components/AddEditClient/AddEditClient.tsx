@@ -8,6 +8,8 @@ import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
 import {useAppContext} from "../../context/app/context";
 import {ModalType} from "../../costansts/type-modal";
 import InputDate from "../UI/Inputs/InputDate/InputDate";
+import SelectInput from "../UI/Inputs/SelectInput/SelectInput";
+import {COUNTRY, TEL_DATA} from "../../costansts/constants-input";
 
 interface AddEditClientProps {
     callback: () => void
@@ -18,8 +20,9 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
 
     const [firstName, setFirstName] = useState<string>(data?.name ?? '')
     const [lastName, setLastName] = useState<string>(data?.surname ?? '')
-    const [birthday, setBirthday] = useState<number | null>( data?.age ?? null)
+    const [birthday, setBirthday] = useState<number | null>(data?.age ?? null)
     const [country, setCountry] = useState<string>(data?.country ?? '')
+    const [typePhone, setTypePhone] = useState<string>('Mob')
     const [phone, setPhone] = useState<string>(data?.phone ?? '')
 
     const app = useAppContext()
@@ -36,8 +39,12 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
         setBirthday(value)
     }
 
-    const handleCountryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setCountry(event.target.value)
+    }
+
+    const handleTypePhoneChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setTypePhone(event.target.value)
     }
 
     const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +53,7 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
 
     const submit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
+        if(!country.length) return
         if (data.isNew) {
             await app?.addClient({
                 name: firstName,
@@ -95,20 +103,30 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
                                        handleChange={handleLastNameChange}/>
                             </label>
                         </div>
-                        <label className='label-inputs' style={{marginBottom: '20px'}}>
+                        <label className='label-inputs'>
                             Date of birth
-                            <InputDate setValue={handleBirthdayChange} value={birthday || null} />
+                            <div style={{marginTop: '7px', marginBottom: '20px'}}>
+                                <InputDate setValue={handleBirthdayChange} value={birthday || null}/>
+                            </div>
                         </label>
                         <label className='label-inputs'>
                             Country
-                            <Input placeholder={'Country'} style={{marginTop: '7px', marginBottom: '20px'}}
-                                   type={'text'} value={country}
-                                   handleChange={handleCountryChange}/>
+                            <div style={{marginTop: '7px', marginBottom: '20px'}}>
+                                <SelectInput placeholder='Select' data={COUNTRY} value={country}
+                                             handleChange={handleCountryChange}/>
+                            </div>
                         </label>
                         <label className='label-inputs'>
                             Telephone
-                            <Input placeholder={'Telephone'} style={{marginTop: '7px'}} type={'tel'} value={phone}
-                                   handleChange={handlePhoneChange}/>
+                            <div style={{marginTop: '7px', display: 'flex'}}>
+                                <SelectInput
+                                    style={{width: '90px', borderBottomRightRadius: 0, borderTopRightRadius: 0}}
+                                    placeholder='' data={TEL_DATA}
+                                    value={typePhone} handleChange={handleTypePhoneChange}/>
+                                <Input style={{flex: '1', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+                                       placeholder={'Telephone'} type={'tel'} value={phone}
+                                       handleChange={handlePhoneChange}/>
+                            </div>
                         </label>
                     </div>
                 </div>

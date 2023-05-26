@@ -1,0 +1,37 @@
+.input-select-wrapper {
+    position: relative;
+}
+
+.input-select {
+    font-family: 'proxima-nova', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding: 10px 15px;
+    border: 1px solid rgba(38, 38, 38, 0.12);
+    width: 100%;
+    border-radius: 4px;
+}
+
+.input-select:focus {
+    outline: none;
+    border: 1px solid var(--color-primary);
+}
+
+.input-select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+
+.input-select::-ms-expand {
+    /* IE */
+    display: none;
+}
+
+.icon-arrow-select {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+}

@@ -1,21 +1,23 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './style.css'
 import {initialDate} from "../../../../utils/formatted-date";
+import {MAX_DATE} from "../../../../costansts/constants-input";
 
 interface InputDateProps {
     value: number | null
     setValue: (v: number) => void
 }
 
-const MAX_DATE = new Date();
-MAX_DATE.setFullYear(MAX_DATE.getFullYear() - 1)
-
 const InputDate: React.FC<InputDateProps> = ({value, setValue = () => undefined}) => {
-    const [selectedDate, setSelectedDate] = useState<Date>(value ? initialDate(value) : MAX_DATE);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [show, setShow] = useState<boolean>(false);
     const refDate = useRef<DatePicker>(null)
+
+    useEffect(() => {
+        handleDateChange(value ? initialDate(value) : MAX_DATE)
+    }, [])
 
     const handleDateChange = (date: Date) => {
         setValue(new Date().getFullYear() - date!.getFullYear())
