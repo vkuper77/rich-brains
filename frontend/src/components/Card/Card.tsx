@@ -1,12 +1,28 @@
 import React from 'react';
+import {Client} from '../../state/types';
 import './style.css'
-import { Client } from '../../state/types';
+import {BUTTONS_SMALL_CARD} from "../../costansts/buttons-small";
 
-interface CardProps { user: Client, callback(client: Client): void  }
+interface CardProps {
+    user: Client,
+    isAuthenticated: boolean
 
-const Card: React.FC<CardProps> = ({user, callback}) => {
+    callback(client: Client): void
+
+    secondaryCallback(id: number, client: Client): void
+}
+
+const Card: React.FC<CardProps> = ({isAuthenticated, user, callback, secondaryCallback}) => {
     return (
-        <div onClick={ () => callback(user)} className='card'>
+        <div onClick={() => callback(user)} className='card'>
+            {isAuthenticated && <div className='buttons-sm-wrapper'>
+                {BUTTONS_SMALL_CARD.map((itm) => <div onClick={(e) => {
+                    e.stopPropagation();
+                    secondaryCallback(itm.id, user)
+                }} key={itm.id}>
+                    <img className='button-sm-img' alt='icon-btn' src={itm.icon}/>
+                </div>)}
+            </div>}
             <img
                 alt='avatar'
                 className='card-avatar'

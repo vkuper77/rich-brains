@@ -53,7 +53,6 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
 
     const submit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(!country.length) return
         if (data.isNew) {
             await app?.addClient({
                 name: firstName,
