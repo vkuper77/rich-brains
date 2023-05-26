@@ -1,10 +1,7 @@
-import React, {ReactNode} from "react";
+import React from "react";
 import useModal from "../../hooks/use-modal";
 import { ModalContext } from "./context";
-
-interface ProviderProps {
-    children: ReactNode;
-}
+import {ProviderProps} from "../../models/context/app-context";
 
 function ModalProvider ({ children }: ProviderProps) {
     const modal = useModal()

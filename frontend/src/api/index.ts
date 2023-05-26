@@ -1,5 +1,6 @@
 import {instance} from "./instance";
 import {KeysLocalStorage} from "../costansts/keys-local-storage";
+import {AddClientParams, EditClientParams, SignInParams} from "../models/responce/responce";
 
 export class AuthApi {
     static async signIn({login, password}: SignInParams) {
@@ -36,26 +37,4 @@ export class AppApi {
     static async deleteClient({id}: { id: string }) {
         return await instance.delete(`clients/remove?id=${id}`)
     }
-}
-
-export type SignInParams = {
-    login: string,
-    password: string
-}
-
-export type AddClientParams = {
-    name: string,
-    surname: string,
-    age: number,
-    phone: string,
-    country: string
-}
-
-export type EditClientParams = {
-    id: string,
-    name: string,
-    surname: string,
-    age: number,
-    phone: string,
-    country: string
 }

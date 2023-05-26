@@ -1,4 +1,9 @@
-import {AddClientParams, EditClientParams, SignInParams} from "../../api";
+import {ReactNode} from "react";
+import {AddClientParams, EditClientParams, SignInParams} from "../responce/responce";
+
+export interface ProviderProps {
+    children: ReactNode;
+}
 
 export interface AppContextValue {
     signIn(p: SignInParams): Promise<void>

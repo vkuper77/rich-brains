@@ -1,10 +1,7 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {SortableTableContext} from "./context";
 import useSortableTable from "../../hooks/use-sortable-table";
-
-interface ProviderProps {
-    children: ReactNode;
-}
+import {ProviderProps} from "../../models/context/app-context";
 
 function SortableProvider({children}: ProviderProps) {
     const params = useSortableTable()

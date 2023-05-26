@@ -1,8 +1,9 @@
 import React, {useCallback} from 'react';
 import {useModalContext} from "../context/modal-desk/context";
-import {AddClientParams, AppApi, AuthApi, EditClientParams, SignInParams} from "../api";
+import {AppApi, AuthApi} from "../api";
 import {useStateContext} from "../context/state/context";
 import {StoreActions} from "../state/types";
+import {AddClientParams, EditClientParams, SignInParams} from "../models/responce/responce";
 
 export default () => {
     const {close: closeModal, open, prevScreen} = useModalContext()

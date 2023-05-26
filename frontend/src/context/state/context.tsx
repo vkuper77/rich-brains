@@ -1,6 +1,6 @@
 import React, {createContext, useContext} from "react";
 import { initialState} from "../../state";
-import {StateContextProps} from "./types";
+import {StateContextProps} from "../../models/context/state-context";
 
 export const StateContext = createContext<StateContextProps>({
     state: initialState,
