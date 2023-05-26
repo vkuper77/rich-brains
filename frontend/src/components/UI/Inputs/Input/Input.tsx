@@ -10,7 +10,7 @@ interface InputProps {
     style?: React.CSSProperties
 }
 
-const Input = ({type = '', placeholder, value = '', id = '', handleChange = () => undefined, style = {}}: InputProps) => {
+const Input: React.FC<InputProps> = ({type = '', placeholder, value = '', id = '', handleChange = () => undefined, style = {}}) => {
     return (
         <input
             className="input-custom"

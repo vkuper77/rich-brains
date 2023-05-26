@@ -29,7 +29,7 @@ const Desk: DeskType = {
     0: () => null
 }
 
-const ModalDesk = () => {
+const ModalDesk: React.FC = () => {
     const {state, close} = useModalContext()
     // @ts-ignore
     const Content = Desk[state?.type ?? 0]

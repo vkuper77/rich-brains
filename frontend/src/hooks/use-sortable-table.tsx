@@ -16,7 +16,7 @@ const useSortableTable = () => {
                     case TypeOptions.Name:
                         return a.name.localeCompare(b.name);
                     case TypeOptions.Date:
-                        return String(a.age).localeCompare(String(b.age));
+                        return a.date.localeCompare(b.date);
                     case TypeOptions.Country:
                         return a.country.localeCompare(b.country);
                     default:
@@ -27,7 +27,7 @@ const useSortableTable = () => {
                     case TypeOptions.Name:
                         return b.name.localeCompare(a.name);
                     case TypeOptions.Date:
-                        return String(b.age).localeCompare(String(a.age));
+                        return String(b.date).localeCompare(String(a.date));
                     case TypeOptions.Country:
                         return b.country.localeCompare(a.country);
                     default:

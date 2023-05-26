@@ -7,7 +7,7 @@ import {ModalType} from "../../costansts/type-modal";
 import {Client} from "../../state/types";
 import {useSortableTableContext} from "../../context/sortable-table/context";
 
-const Users = () => {
+const Users: React.FC = () => {
     const { state } = useStateContext()
     const { open, setNextScreen} = useModalContext()
     const sortParams = useSortableTableContext()

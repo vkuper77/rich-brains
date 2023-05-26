@@ -9,7 +9,7 @@ import {useStateContext} from "../../context/state/context";
 import {shortenString} from "../../utils/shorten-string";
 import './style.css'
 
-const SearchPanel = () => {
+const SearchPanel: React.FC = () => {
     const {state} = useStateContext()
     const sortParams = useSortableTableContext()
     const {open} = useModalContext()

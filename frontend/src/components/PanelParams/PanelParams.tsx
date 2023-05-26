@@ -6,14 +6,14 @@ import './style.css'
 
 interface PanelParamsProps {
     radioValue: FilterOption | undefined
-    setRadioValue: ((v: FilterOption) => void ) | undefined
-    tabValue:FilterOption | undefined
+    setRadioValue: ((v: FilterOption) => void) | undefined
+    tabValue: FilterOption | undefined
     setTabValue: ((v: FilterOption) => void) | undefined
     showParams: boolean
     setShowParams: (v: boolean) => void
 }
 
-const PanelParams = ({radioValue, setRadioValue, tabValue, setTabValue, showParams, setShowParams }: PanelParamsProps) => {
+const PanelParams: React.FC<PanelParamsProps> = ({radioValue, setRadioValue, tabValue, setTabValue, showParams, setShowParams}) => {
     return (
         <div className='panel-container'>
             {/* Label */}
@@ -39,7 +39,8 @@ const PanelParams = ({radioValue, setRadioValue, tabValue, setTabValue, showPara
                     handleChange={(v: FilterOption) => setRadioValue && setRadioValue(v)}
                 />
                 <div style={{marginTop: '10px'}}>
-                    <TabGroup options={TAB_OPTIONS} selectedOption={tabValue} handleChange={(v: FilterOption) => setTabValue && setTabValue}/>
+                    <TabGroup options={TAB_OPTIONS} selectedOption={tabValue}
+                              handleChange={(v: FilterOption) => setTabValue && setTabValue(v)}/>
                 </div>
             </div>}
 

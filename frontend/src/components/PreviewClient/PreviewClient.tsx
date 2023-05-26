@@ -11,7 +11,7 @@ interface PreviewClientProps {
     callback: () => void
 }
 
-const PreviewClient = ({callback}: PreviewClientProps) => {
+const PreviewClient: React.FC<PreviewClientProps> = ({callback}) => {
     const {state, open, setPrevScreen} = useModalContext()
 
     const onPressEdit = useCallback(() => {
@@ -58,7 +58,7 @@ const PreviewClient = ({callback}: PreviewClientProps) => {
                         className='card-icon'
                         src={require('../../assets/image/calendar.png')}
                     />
-                    <span>{state.data.age}</span>
+                    <span>{state.data.date}</span>
                 </div>
                 <button onClick={callback} type='button' className='preview-button'>Close</button>
             </div>

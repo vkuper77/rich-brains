@@ -8,7 +8,7 @@ interface ItemProps {
     handleChange: (value: FilterOption) => void
 }
 
-const Item = ({item, selectedOption, handleChange}: ItemProps) => {
+const Item: React.FC<ItemProps> = ({item, selectedOption, handleChange}) => {
     return <div
         onClick={() => handleChange(item)}
         className={`tab-item ${selectedOption.id === item.id && 'tab-item_active' || ''} `}>
@@ -24,7 +24,7 @@ interface TabGroupProps {
 }
 
 
-const TabGroup = ({options, selectedOption, handleChange}: TabGroupProps) => {
+const TabGroup: React.FC<TabGroupProps> = ({options, selectedOption, handleChange}) => {
     return (
         <div className='container-tab'>
             {options.map((item) => <Item key={item.id} item={item} selectedOption={selectedOption}

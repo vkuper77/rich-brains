@@ -9,7 +9,7 @@ interface ItemsProps {
     handleChange?: (value: FilterOption) => void
 }
 
-const Items = ({item, selectedOption = null, handleChange = () => undefined, defaultSelected}: ItemsProps) => {
+const Items: React.FC<ItemsProps> = ({item, selectedOption = null, handleChange = () => undefined, defaultSelected}) => {
     return <label className='label'>
         <input
             type="radio"

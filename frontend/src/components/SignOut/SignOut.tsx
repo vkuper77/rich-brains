@@ -7,7 +7,7 @@ interface SignOutProps {
     callback: () => void
 }
 
-const SignOut = ({callback}: SignOutProps) => {
+const SignOut: React.FC<SignOutProps> = ({callback}) => {
     const app = useAppContext()
     return (
         <div className='sign-out-wrapper'>

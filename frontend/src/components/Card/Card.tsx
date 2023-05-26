@@ -4,7 +4,7 @@ import { Client } from '../../state/types';
 
 interface CardProps { user: Client, callback(client: Client): void  }
 
-const Card = ({user, callback}: CardProps) => {
+const Card: React.FC<CardProps> = ({user, callback}) => {
     return (
         <div onClick={ () => callback(user)} className='card'>
             <img
@@ -35,7 +35,7 @@ const Card = ({user, callback}: CardProps) => {
                     className='card-icon'
                     src={require('../../assets/image/calendar.png')}
                 />
-                <span>{user.age}</span>
+                <span>{user.date}</span>
             </div>
         </div>
     );

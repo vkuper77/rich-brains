@@ -5,7 +5,7 @@ interface EditButtonProps {
     callback: () => void
 }
 
-const EditButton = ({callback}:EditButtonProps) => {
+const EditButton: React.FC<EditButtonProps> = ({callback}) => {
     return (
         <div onClick={callback} className='button-container'>
             <img alt='icon' src={require('../../../../assets/image/edit.png')}/>

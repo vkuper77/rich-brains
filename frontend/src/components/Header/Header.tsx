@@ -4,7 +4,7 @@ import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
 import {useStateContext} from "../../context/state/context";
 
-const User = ({name}: { name: string }) => {
+const User: React.FC<{ name: string }> = ({name}) => {
     const {open} = useModalContext()
     return <div onClick={() => {
         open({type: ModalType.SignOut})
@@ -15,7 +15,7 @@ const User = ({name}: { name: string }) => {
     </div>
 }
 
-const SignInButton = () => {
+const SignInButton: React.FC = () => {
     const {open} = useModalContext()
     return <div className='button' onClick={() => {
         open({type: ModalType.SignIn})
@@ -29,7 +29,7 @@ interface HeaderProps {
     routeName?: string
 }
 
-const Header = ({routeName = 'Clients'}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
     const {state} = useStateContext()
     return (
         <>

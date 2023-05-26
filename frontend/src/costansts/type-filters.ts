@@ -14,7 +14,7 @@ export type FilterOption = {
 
 export const OPTIONS_FILTER: FilterOption[] = [
     { id: TypeOptions.Name, name: 'Name', key: 'name' },
-    { id: TypeOptions.Date, name: 'Date of birth', key: 'age' },
+    { id: TypeOptions.Date, name: 'Date of birth', key: 'date',},
     { id: TypeOptions.Country, name: 'Country' , key: 'country'},
 ];
 
