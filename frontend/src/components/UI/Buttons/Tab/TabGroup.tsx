@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css'
-import {FilterOption} from "../../../../costansts/type-filters";
+import {FilterOption, TypeOptions} from "../../../../costansts/type-filters";
 
 interface ItemProps {
     item: FilterOption
@@ -9,10 +9,12 @@ interface ItemProps {
 }
 
 const Item: React.FC<ItemProps> = ({item, selectedOption, handleChange}) => {
+    const icon = selectedOption.id === item.id ? require(`../../../../assets/image/arrow-primary.png`) : require(`../../../../assets/image/arrow.png`)
     return <div
         onClick={() => handleChange(item)}
         className={`tab-item ${selectedOption.id === item.id && 'tab-item_active' || ''} `}>
-        <img alt='icon' className='arrow-down' src={require('../../../../assets/image/arrow.png')}/>
+        <img alt='icon' className='arrow-down' style={{rotate: item.id === TypeOptions.Asc ? '180deg' : '0'}}
+             src={(icon)}/>
         <span className='tab-name'>{item.name}</span>
     </div>
 }
@@ -22,7 +24,6 @@ interface TabGroupProps {
     selectedOption?: any
     handleChange: (value: FilterOption) => void
 }
-
 
 const TabGroup: React.FC<TabGroupProps> = ({options, selectedOption, handleChange}) => {
     return (
