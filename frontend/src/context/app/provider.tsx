@@ -4,8 +4,7 @@ import useApp from '../../hooks/use-app'
 import {AppContextValue, ProviderProps} from "../../models/context/app-context";
 
 function AppProvider({children}: ProviderProps) {
-    const app = useApp()
-    const appContextValue: AppContextValue = {...app};
+    const appContextValue: AppContextValue = useApp()
     return <AppContext.Provider value={appContextValue}>{children}</AppContext.Provider>
 }
 

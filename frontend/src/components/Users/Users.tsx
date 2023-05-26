@@ -5,10 +5,12 @@ import {useStateContext} from "../../context/state/context";
 import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
 import {Client} from "../../state/types";
+import {useSortableTableContext} from "../../context/sortable-table/context";
 
 const Users = () => {
     const { state } = useStateContext()
     const { open, setNextScreen} = useModalContext()
+    const sortParams = useSortableTableContext()
 
     const onPressCard = useCallback((client: Client) => {
         if(!state.isAuthenticated) {
@@ -22,7 +24,7 @@ const Users = () => {
     return (
         <div className='users-wrapper'>
             <div className='users-container _container'>
-                {state.clients.map((item) => <Card callback={onPressCard} key={item.id} user={item}/>)}
+                {sortParams?.sortData.map((item) => <Card callback={onPressCard} key={item.id} user={item}/>)}
             </div>
         </div>
     );

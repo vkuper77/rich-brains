@@ -3,17 +3,22 @@ export enum TypeOptions {
     Date = 2,
     Country = 3,
     Asc = 4,
-    Desc  = 5
+    Desc = 5,
 }
 
-export const OPTIONS_FILTER = [
-    {id: TypeOptions.Name, name: 'Name'},
-    {id: TypeOptions.Date, name: 'Date of birth'},
-    {id: TypeOptions.Country, name: 'Country'},
-]
+export type FilterOption = {
+    id: TypeOptions;
+    name: string;
+    key?: string;
+};
 
+export const OPTIONS_FILTER: FilterOption[] = [
+    { id: TypeOptions.Name, name: 'Name', key: 'name' },
+    { id: TypeOptions.Date, name: 'Date of birth', key: 'age' },
+    { id: TypeOptions.Country, name: 'Country' , key: 'country'},
+];
 
-export const TAB_OPTIONS = [
-    {id: TypeOptions.Asc, name: 'Asc.'},
-    {id: TypeOptions.Desc, name: 'Desc.'},
-]
+export const TAB_OPTIONS: FilterOption[] = [
+    { id: TypeOptions.Asc, name: 'Asc.' },
+    { id: TypeOptions.Desc, name: 'Desc.' },
+];
