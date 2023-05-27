@@ -8,7 +8,7 @@ interface MainButtonProps {
     callback?: () => void
 }
 
-const MainButton = ({type = 'button', text = '', styleButton = 'main-button', callback = () => undefined}: MainButtonProps) => {
+const MainButton: React.FC<MainButtonProps> = ({type = 'button', text = '', styleButton = 'main-button', callback = () => undefined}) => {
     return <button onClick={callback} className={`button-custom ${styleButton}`} type={type}>{text}</button>
 };
 

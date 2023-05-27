@@ -1,17 +1,22 @@
 import React, {useCallback} from 'react';
 import Card from "../Card/Card";
-import './style.css'
 import {useStateContext} from "../../context/state/context";
 import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
 import {Client} from "../../state/types";
+import {useSortableTableContext} from "../../context/sortable-table/context";
+import {ButtonSmallCardType} from "../../costansts/buttons-small";
+import './style.css'
+import {useAppContext} from "../../context/app/context";
 
-const Users = () => {
-    const { state } = useStateContext()
-    const { open, setNextScreen} = useModalContext()
+const Users: React.FC = () => {
+    const {state} = useStateContext()
+    const {open, setNextScreen} = useModalContext()
+    const sortParams = useSortableTableContext()
+    const app = useAppContext()
 
     const onPressCard = useCallback((client: Client) => {
-        if(!state.isAuthenticated) {
+        if (!state.isAuthenticated) {
             open({type: ModalType.SignIn})
             setNextScreen({type: ModalType.PreviewClient, data: client})
             return
@@ -19,10 +24,23 @@ const Users = () => {
         open({type: ModalType.PreviewClient, data: client})
     }, [state])
 
+    const onPressButtonsSmall = useCallback((buttonId: number, client: Client) => {
+        if (buttonId === ButtonSmallCardType.Delete) {
+            open({type: ModalType.DeleteClient, data: {id: client.id}})
+        } else {
+            open({type: ModalType.AddEditClient, data: {...client, isNew: false}})
+        }
+    }, [])
+
     return (
         <div className='users-wrapper'>
             <div className='users-container _container'>
-                {state.clients.map((item) => <Card callback={onPressCard} key={item.id} user={item}/>)}
+                {Boolean(sortParams?.sortData.length) ? sortParams?.sortData.map((item) => <Card
+                    isAuthenticated={state.isAuthenticated} callback={onPressCard}
+                    secondaryCallback={onPressButtonsSmall}
+                    key={item.id} user={item}/>) : !app?.loading &&
+                    <div style={{margin: '0 auto', fontSize: '1.5rem'}}>list empty</div>}
+                {app?.loading && <div style={{margin: '0 auto', fontSize: '1.5rem'}}>loading...</div>}
             </div>
         </div>
     );

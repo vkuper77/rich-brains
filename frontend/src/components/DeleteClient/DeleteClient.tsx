@@ -8,12 +8,12 @@ interface DeleteClientProps {
     callback: () => void
 }
 
-const DeleteClient = ({callback = () => undefined}: DeleteClientProps) => {
+const DeleteClient: React.FC<DeleteClientProps> = ({callback = () => undefined}) => {
     const app = useAppContext()
-    const {state, open, prevScreen } = useModalContext()
+    const {state, open, prevScreen} = useModalContext()
     const onPressDelete = useCallback(async () => {
         await app?.deleteClient(state.data.id)
-    },[])
+    }, [])
     return (
         <div className='sign-out-wrapper'>
             <div onClick={callback} className='cross-icon'>

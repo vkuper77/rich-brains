@@ -1,6 +1,7 @@
 import React from 'react';
-import {Action, State, StoreActions} from "./types";
+import {Action, Client, State, StoreActions} from "./types";
 import {produce} from "immer";
+import {formattedBirthDate} from "../utils/formatted-date";
 
 export const initialState: State = {
     isAuthenticated: false,
@@ -22,15 +23,15 @@ export const reducer = (state: State, {type, payload}: Action): State => {
             })
         case StoreActions.SET_CLIENTS:
             return produce(state, (draft) => {
-                draft.clients = payload
+                draft.clients = payload.map((client: Client) => ({...client, date: formattedBirthDate(client.age)}))
             })
         case StoreActions.ADD_CLIENT:
             return produce(state, (draft) => {
-                draft.clients.push(payload)
+                draft.clients.push({...payload, date: formattedBirthDate(payload.age)})
             })
         case StoreActions.EDIT_CLIENT:
             return produce(state, (draft) => {
-                draft.clients = draft.clients.map(client => client.id === payload.id ? payload : client)
+                draft.clients = draft.clients.map(client => client.id === payload.id ? {...payload, date: formattedBirthDate(payload.age)} : client)
             })
         case StoreActions.DELETE_CLIENT:
             return produce(state, (draft) => {

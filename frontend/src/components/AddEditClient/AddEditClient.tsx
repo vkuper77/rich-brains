@@ -7,18 +7,22 @@ import {useModalContext} from "../../context/modal-desk/context";
 import DeleteButton from "../UI/Buttons/DeleteButton/DeleteButton";
 import {useAppContext} from "../../context/app/context";
 import {ModalType} from "../../costansts/type-modal";
+import InputDate from "../UI/Inputs/InputDate/InputDate";
+import SelectInput from "../UI/Inputs/SelectInput/SelectInput";
+import {COUNTRY, TEL_DATA} from "../../costansts/constants-input";
 
 interface AddEditClientProps {
     callback: () => void
 }
 
-const AddEditClient = ({callback}: AddEditClientProps) => {
+const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
     const {state: {data}, open, setPrevScreen, prevScreen} = useModalContext()
 
     const [firstName, setFirstName] = useState<string>(data?.name ?? '')
     const [lastName, setLastName] = useState<string>(data?.surname ?? '')
-    const [birthday, setBirthday] = useState<string>('')
+    const [birthday, setBirthday] = useState<number | null>(data?.age ?? null)
     const [country, setCountry] = useState<string>(data?.country ?? '')
+    const [typePhone, setTypePhone] = useState<string>('Mob')
     const [phone, setPhone] = useState<string>(data?.phone ?? '')
 
     const app = useAppContext()
@@ -31,12 +35,16 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
         setLastName(event.target.value)
     }
 
-    const handleBirthdayChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setBirthday(event.target.value)
+    const handleBirthdayChange = (value: number) => {
+        setBirthday(value)
     }
 
-    const handleCountryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
         setCountry(event.target.value)
+    }
+
+    const handleTypePhoneChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setTypePhone(event.target.value)
     }
 
     const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,10 +53,23 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
 
     const submit = async (e: ChangeEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if(data.isNew){
-            await app?.addClient({name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
-        } else if(!data.isNew) {
-            await app?.editClient({id: data.id, name: firstName, surname: lastName, age: 27 /** test age */, phone: phone, country: country})
+        if (data.isNew) {
+            await app?.addClient({
+                name: firstName,
+                surname: lastName,
+                age: birthday ?? 0,
+                phone: phone,
+                country: country
+            })
+        } else if (!data.isNew) {
+            await app?.editClient({
+                id: data.id,
+                name: firstName,
+                surname: lastName,
+                age: birthday ?? 0,
+                phone: phone,
+                country: country
+            })
         }
     }
 
@@ -59,7 +80,7 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
 
     return (
         <div className='client-wrapper'>
-            <div onClick={callback} className='cross-icon'>
+            <div onClick={callback} className='cross-icon client-cross-icon'>
                 <img alt='cross' src={require('../../assets/image/close.png')}/>
             </div>
             <form className='client-container' onSubmit={submit}>
@@ -67,41 +88,53 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                 <div className='client-container-info'>
                     <img alt='avatar' className='client-avatar' src={require('../../assets/image/avatar.png')}/>
                     <div className='client-container-inputs'>
-                        <div className='client-container-name' style={{marginBottom: '20px'}}>
-                            <label className='label-inputs' style={{marginRight: '20px'}}>
+                        <div className='client-container-name'>
+                            <label className='label-inputs'>
                                 First name
-                                <Input style={{marginTop: '7px'}} type={'text'} value={firstName}
+                                <Input placeholder={'First name'} style={{marginTop: '7px'}} type={'text'}
+                                       value={firstName}
                                        handleChange={handleFirstNameChange}/>
                             </label>
                             <label className='label-inputs'>
                                 Last name
-                                <Input style={{marginTop: '7px'}} type={'text'} value={lastName}
+                                <Input placeholder={'Last name'} style={{marginTop: '7px'}} type={'text'}
+                                       value={lastName}
                                        handleChange={handleLastNameChange}/>
                             </label>
                         </div>
-                        <label className='label-inputs' style={{marginBottom: '20px'}}>
+                        <label className='label-inputs-date'>
                             Date of birth
-                            <Input style={{marginTop: '7px', marginBottom: '20px'}} type={'date'} value={birthday}
-                                   handleChange={handleBirthdayChange}/>
+                            <div style={{marginTop: '7px', marginBottom: '20px'}}>
+                                <InputDate setValue={handleBirthdayChange} value={birthday || null}/>
+                            </div>
                         </label>
                         <label className='label-inputs'>
                             Country
-                            <Input style={{marginTop: '7px', marginBottom: '20px'}} type={'text'} value={country}
-                                   handleChange={handleCountryChange}/>
+                            <div style={{marginTop: '7px', marginBottom: '20px'}}>
+                                <SelectInput placeholder='Select' data={COUNTRY} value={country}
+                                             handleChange={handleCountryChange}/>
+                            </div>
                         </label>
                         <label className='label-inputs'>
                             Telephone
-                            <Input style={{marginTop: '7px'}} type={'tel'} value={phone}
-                                   handleChange={handlePhoneChange}/>
+                            <div style={{marginTop: '7px', display: 'flex'}}>
+                                <SelectInput
+                                    style={{width: '90px', borderBottomRightRadius: 0, borderTopRightRadius: 0}}
+                                    placeholder='' data={TEL_DATA}
+                                    value={typePhone} handleChange={handleTypePhoneChange}/>
+                                <Input style={{flex: '1', borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+                                       placeholder={'Telephone'} type={'tel'} value={phone}
+                                       handleChange={handlePhoneChange}/>
+                            </div>
                         </label>
                     </div>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <div style={{display: 'flex'}}>
-                        <div style={{width: '100px', marginRight: '10px'}}>
+                <div className='wrapper-buttons-footer'>
+                    <div className='container-buttons-footer'>
+                        <div className='button-footer'>
                             <MainButton type='submit' text='Save' styleButton='main-button'/>
                         </div>
-                        <div style={{width: '100px'}}>
+                        <div className='button-footer' style={{marginRight: 0}}>
                             <MainButton
                                 type='button'
                                 text='Cancel'
@@ -110,7 +143,9 @@ const AddEditClient = ({callback}: AddEditClientProps) => {
                             />
                         </div>
                     </div>
-                    {!data.isNew && <DeleteButton callback={onPressDelete}/>}
+                    {!data.isNew && <div className='button-delete-footer'>
+                        <DeleteButton callback={onPressDelete}/>
+                    </div>}
                 </div>
             </form>
         </div>

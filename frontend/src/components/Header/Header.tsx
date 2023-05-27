@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './styles.css'
 import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
 import {useStateContext} from "../../context/state/context";
+import {useAppContext} from "../../context/app/context";
 
-const User = ({name}: { name: string }) => {
+const User: React.FC<{ name: string }> = ({name}) => {
     const {open} = useModalContext()
-    return <div onClick={() => {
-        open({type: ModalType.SignOut})
-    }} className='user-container'>
-        <img style={{width: '16px', height: '16px'}} alt='icon' src={require('../../assets/image/user.png')}/>
-        <span>{name}</span>
+
+    const handleImageClick = useCallback(() => {
+        open({type: ModalType.SignOut});
+    }, []);
+
+    return <div onClick={handleImageClick} className='user-container'>
+        <img style={{width: '16px', height: '16px', marginRight: '7px'}} alt='icon'
+             src={require('../../assets/image/user.png')}/>
+        <span className='user-container-title'>{name}</span>
         <img style={{width: '16px', height: '16px'}} alt='icon' src={require('../../assets/image/arrow-down.png')}/>
     </div>
+
 }
 
-const SignInButton = () => {
+const SignInButton: React.FC = () => {
     const {open} = useModalContext()
     return <div className='button' onClick={() => {
         open({type: ModalType.SignIn})
@@ -29,8 +35,9 @@ interface HeaderProps {
     routeName?: string
 }
 
-const Header = ({routeName = 'Clients'}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
     const {state} = useStateContext()
+    const app = useAppContext()
     return (
         <>
             <div className='wrapper'>
@@ -41,7 +48,8 @@ const Header = ({routeName = 'Clients'}: HeaderProps) => {
                     </div>
                     <div className='main'>
                         <h2 className='route'>{routeName}</h2>
-                        {state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/>}
+                        {!app?.loading ? state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/> :
+                            <div>loading...</div>}
                     </div>
                 </div>
             </div>

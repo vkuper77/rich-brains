@@ -1,15 +1,10 @@
-import React, {ReactNode} from "react";
+import React from "react";
 import {AppContext} from "./context";
 import useApp from '../../hooks/use-app'
-import {AppContextValue} from "./type";
-
-interface ProviderProps {
-    children: ReactNode;
-}
+import {AppContextValue, ProviderProps} from "../../models/context/app-context";
 
 function AppProvider({children}: ProviderProps) {
-    const app = useApp()
-    const appContextValue: AppContextValue = {...app};
+    const appContextValue: AppContextValue = useApp()
     return <AppContext.Provider value={appContextValue}>{children}</AppContext.Provider>
 }
 

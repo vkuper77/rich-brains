@@ -1,18 +1,31 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {useModalContext} from "../context/modal-desk/context";
-import {AddClientParams, AppApi, AuthApi, EditClientParams, SignInParams} from "../api";
+import {AppApi, AuthApi} from "../api";
 import {useStateContext} from "../context/state/context";
 import {StoreActions} from "../state/types";
+import {AddClientParams, EditClientParams, SignInParams} from "../models/responce/responce";
+import {useTipsContext} from "../context/tips/context";
+import {TipsType} from "../costansts/type-modal";
+import {sleep} from "../utils/sleep";
 
 export default () => {
     const {close: closeModal, open, prevScreen} = useModalContext()
+    const { setShowTips } = useTipsContext()
     const {dispatch} = useStateContext()
+    const [loading, setLoading] = useState<boolean>(false)
 
     /** Sign In User to App */
-    const signIn = useCallback(async (data: SignInParams) => {
+    const signIn = useCallback(async (data: SignInParams, showTips = true) => {
+        setLoading(true)
         try {
             const response = await AuthApi.signIn(data)
+            /**load emission*/
+            await sleep(1000)
+            /**show success tips*/
+            showTips && setShowTips({type: TipsType.Success, message: 'You have successfully logged in', duration: 3000})
+            /**set store*/
             dispatch({type: StoreActions.LOGIN, payload: {login: response.login}})
+
             /** if the card has been pressed but is not authorized */
             if (prevScreen) {
                 open(prevScreen)
@@ -20,9 +33,12 @@ export default () => {
                 closeModal()
             }
         } catch (e) {
-            alert(e)
+            /**show error tips*/
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[signIn]:', e)
             closeModal()
+        } finally {
+            setLoading(false)
         }
     }, [prevScreen])
 
@@ -32,7 +48,8 @@ export default () => {
             await AuthApi.signOut()
             dispatch({type: StoreActions.LOGOUT})
         } catch (e) {
-            alert(e)
+            /**show error tips*/
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[signOut]:', e)
         } finally {
             closeModal()
@@ -43,9 +60,13 @@ export default () => {
     const getClients = useCallback(async () => {
         try {
             const resp = await AppApi.getClients()
+            /**load emission*/
+            await sleep(1000)
+            /**set store*/
             dispatch({type: StoreActions.SET_CLIENTS, payload: resp.clients})
         } catch (e) {
-            alert(e)
+            /**show error tips*/
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[getClients]:', e)
         }
     }, [])
@@ -54,9 +75,12 @@ export default () => {
     const addClient = useCallback(async (data: AddClientParams) => {
         try {
             const resp = await AppApi.addClient(data)
+            /**show success tips*/
+            setShowTips({type: TipsType.Success, message: 'New client was added successfully', duration: 3000})
+            /**set store*/
             dispatch({type: StoreActions.ADD_CLIENT, payload: resp.client})
         } catch (e) {
-            alert(e)
+            setShowTips({type: TipsType.Error, message: 'you have successfully logged in', duration: 3000})
             console.error('[addClient]:', e)
         } finally {
             closeModal()
@@ -67,9 +91,13 @@ export default () => {
     const editClient = useCallback(async (data: EditClientParams) => {
         try {
             const resp = await AppApi.editClient(data)
+            /**show success tips*/
+            setShowTips({type: TipsType.Success, message: 'Client was edited successfully', duration: 3000})
+            /**set store*/
             dispatch({type: StoreActions.EDIT_CLIENT, payload: resp.client})
         } catch (e) {
-            alert(e)
+            /**show error tips*/
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[editClient]:', e)
         } finally {
             closeModal()
@@ -80,14 +108,18 @@ export default () => {
     const deleteClient = useCallback(async (id: string) => {
         try {
             await AppApi.deleteClient({id})
+            /**show success tips*/
+            setShowTips({type: TipsType.Success, message: 'Client was deleted', duration: 3000})
+            /**set store*/
             dispatch({type: StoreActions.DELETE_CLIENT, payload: {id}})
         } catch (e) {
-            alert(e)
+            /**show error tips*/
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[deleteClient]:', e)
         } finally {
             closeModal()
         }
     }, [])
 
-    return {signIn, signOut, getClients, addClient, editClient, deleteClient}
+    return {loading, signIn, signOut, getClients, addClient, editClient, deleteClient}
 };

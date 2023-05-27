@@ -1,16 +1,15 @@
 import React from 'react';
 import './style.css'
-
-type ItemOptions = { id: number, name: string }
+import {FilterOption} from "../../../../costansts/type-filters";
 
 interface ItemsProps {
-    item: ItemOptions
-    selectedOption: ItemOptions | null
-    defaultSelected: ItemOptions
-    handleChange?: (value: ItemOptions) => void
+    item: FilterOption
+    selectedOption: FilterOption | null
+    defaultSelected: FilterOption
+    handleChange?: (value: FilterOption) => void
 }
 
-const Items = ({item, selectedOption = null, handleChange = () => undefined, defaultSelected}: ItemsProps) => {
+const Items: React.FC<ItemsProps> = ({item, selectedOption = null, handleChange = () => undefined, defaultSelected}) => {
     return <label className='label'>
         <input
             type="radio"
@@ -25,9 +24,9 @@ const Items = ({item, selectedOption = null, handleChange = () => undefined, def
 }
 
 interface RadioButtonGroupProps {
-    options?: Array<ItemOptions>,
-    selectedOption?: ItemOptions | null
-    handleChange: (value: ItemOptions) => void
+    options?: Array<FilterOption>,
+    selectedOption?: FilterOption | null
+    handleChange: (value: FilterOption) => void
 }
 
 const RadioButtonGroup = (

@@ -1,7 +1,7 @@
 .preview-wrapper {
     position: relative;
     background-color: var(--color-white);
-    padding: 3.75rem 4.37rem;
+    padding: 3.7rem 4.37rem;
 }
 
 .preview-container {
@@ -13,9 +13,9 @@
 
 .preview-avatar {
     width: 200px;
-    height: 210px;
+    height: 215px;
     margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.2rem;
 }
 
 .preview-title {
@@ -23,7 +23,7 @@
     font-weight: 700;
     font-size: 2rem;
     line-height: 2.62rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.28rem;
     text-transform: capitalize;
 }
 
@@ -35,7 +35,7 @@
     line-height: 1.25rem;
     color: var(--color-light-black);
     padding: 10px 30px;
-    margin-top: 2.5rem;
+    margin-top: 2rem;
 }
 
 .preview-button:hover {
@@ -50,4 +50,34 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
+}
+
+@media (max-width: 450px) {
+    .preview-wrapper {
+        padding: 64px 30px;
+    }
+
+    .preview-container {
+        width: 260px;
+    }
+
+    .preview-container-buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .preview-container-buttons > .button-container {
+        margin-bottom: 30px;
+    }
+
+    .preview-avatar {
+        width: 150px;
+        height: 160px;
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .preview-button{
+     margin-top: 1.2rem;
+    }
 }

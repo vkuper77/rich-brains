@@ -44,7 +44,7 @@
 }
 
 
-@media (max-width:500px) {
+@media (max-width: 500px) {
     .sign-wrapper {
         display: flex;
         flex-direction: column;
@@ -52,8 +52,12 @@
         padding: 30px;
     }
 
+    .sign-title {
+        margin-bottom: 1.7rem;
+    }
+
     .sign-form {
-        width: 100%;
+        width: 260px;
     }
 }
 

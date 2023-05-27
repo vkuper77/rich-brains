@@ -1,4 +1,4 @@
-import React, {MouseEventHandler, ReactNode, useCallback, useMemo} from 'react';
+import React, {MouseEventHandler, ReactNode, useCallback} from 'react';
 import './style.css'
 
 interface ModalProps {
@@ -7,7 +7,7 @@ interface ModalProps {
     children: ReactNode;
 }
 
-const Modal = ({isOpen, onClose, children}: ModalProps) => {
+const Modal: React.FC<ModalProps> = ({isOpen, onClose, children}) => {
 
     const overlayStyles: React.CSSProperties = {
         visibility: isOpen ? 'visible' : 'hidden',

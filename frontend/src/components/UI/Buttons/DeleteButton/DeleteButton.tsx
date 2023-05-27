@@ -5,7 +5,7 @@ interface DeleteButtonProps {
     callback: () => void
 }
 
-const DeleteButton = ({callback}: DeleteButtonProps) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({callback}) => {
     return (
         <div onClick={callback} className='button-container'>
             <img alt='icon' src={require('../../../../assets/image/trash.png')} />

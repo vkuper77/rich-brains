@@ -22,4 +22,5 @@ export type Client = {
     phone: string,
     surname: string
     name: string
+    date: string
 }

@@ -7,7 +7,7 @@ interface SearchInput {
     setValue?: (value: string) => void
 }
 
-const SearchInput = ({placeholder = '', value = '', setValue = () => undefined}: SearchInput) => {
+const SearchInput: React.FC<SearchInput> = ({placeholder = '', value = '', setValue = () => undefined}) => {
     return (
         <div className='container'>
             <img alt='icon' className='search' src={require('../../../../assets/image/search.png')}/>

@@ -26,14 +26,13 @@ const Desk: DeskType = {
     [ModalType.DeleteClient]: (p ) => <DeleteClient {...p} />,
     [ModalType.PreviewClient]: (p ) => <PreviewClient {...p} />,
     [ModalType.AddEditClient]: (p ) => <AddEditClient {...p} />,
-    [0]: () => null
+    0: () => null
 }
 
-const ModalDesk = () => {
+const ModalDesk: React.FC = () => {
     const {state, close} = useModalContext()
     // @ts-ignore
     const Content = Desk[state?.type ?? 0]
-
     return (
         <>
             <Modal isOpen={Boolean(state.type)} onClose={close}>

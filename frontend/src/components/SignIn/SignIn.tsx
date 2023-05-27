@@ -8,7 +8,7 @@ interface SignInProps {
     callback: () => void
 }
 
-const SignIn = ({callback}: SignInProps) => {
+const SignIn: React.FC<SignInProps> = ({callback}) => {
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [showPass, setShowPass] = useState<boolean>(false)

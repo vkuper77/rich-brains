@@ -86,13 +86,13 @@
     opacity: 0.7;
 }
 
-.user-container > span {
+.user-container-title {
     display: block;
     font-family: 'proxima-nova', sans-serif;
     font-weight: 400;
     font-size: 1rem;
     line-height: 1.25rem;
-    margin: 0 7px;
+    margin: 0 7px ;
 }
 
 @media(max-width: 500px) {
@@ -116,5 +116,15 @@
 
     .logo img:last-child {
         display: flex;
+    }
+}
+
+@media(max-width: 320px) {
+    .user-container-title{
+        display: none;
+    }
+
+    .user-container > img {
+        margin-right: 7px;
     }
 }

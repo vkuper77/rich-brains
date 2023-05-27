@@ -1,7 +1,7 @@
 import React, {useReducer} from "react";
 import {initialState, reducer} from "../../state";
 import { StateContext } from "./context";
-import {StateProviderProps} from "./types";
+import {StateProviderProps} from "../../models/context/state-context";
 
 function StateProvider ({ children }: StateProviderProps) {
     const [state, dispatch] = useReducer(reducer, initialState);
