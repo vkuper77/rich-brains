@@ -3,6 +3,7 @@ import './styles.css'
 import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
 import {useStateContext} from "../../context/state/context";
+import {useAppContext} from "../../context/app/context";
 
 const User: React.FC<{ name: string }> = ({name}) => {
     const {open} = useModalContext()
@@ -31,6 +32,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
     const {state} = useStateContext()
+    const app = useAppContext()
     return (
         <>
             <div className='wrapper'>
@@ -41,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
                     </div>
                     <div className='main'>
                         <h2 className='route'>{routeName}</h2>
-                        {state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/>}
+                        {!app?.loading ? state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/> : <div>loading...</div> }
                     </div>
                 </div>
             </div>

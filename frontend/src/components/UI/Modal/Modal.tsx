@@ -1,6 +1,5 @@
-import React, {MouseEventHandler, ReactNode, useCallback, useMemo} from 'react';
+import React, {MouseEventHandler, ReactNode, useCallback} from 'react';
 import './style.css'
-import SearchInput from "../Inputs/SearchInput/SearchInput";
 
 interface ModalProps {
     isOpen: boolean;
@@ -8,7 +7,7 @@ interface ModalProps {
     children: ReactNode;
 }
 
-const Modal: React.FC<ModalProps>  = ({isOpen, onClose, children}) => {
+const Modal: React.FC<ModalProps> = ({isOpen, onClose, children}) => {
 
     const overlayStyles: React.CSSProperties = {
         visibility: isOpen ? 'visible' : 'hidden',

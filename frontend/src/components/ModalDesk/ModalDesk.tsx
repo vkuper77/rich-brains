@@ -33,7 +33,6 @@ const ModalDesk: React.FC = () => {
     const {state, close} = useModalContext()
     // @ts-ignore
     const Content = Desk[state?.type ?? 0]
-
     return (
         <>
             <Modal isOpen={Boolean(state.type)} onClose={close}>

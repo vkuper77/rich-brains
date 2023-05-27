@@ -6,10 +6,11 @@ export interface ProviderProps {
 }
 
 export interface AppContextValue {
-    signIn(p: SignInParams): Promise<void>
+    signIn(p: SignInParams, hideTips?: boolean): Promise<void>
     signOut(): Promise<void>
     deleteClient(id: string): Promise<void>
     getClients(): Promise<void>
     addClient(p: AddClientParams): Promise<void>
     editClient(p: EditClientParams): Promise<void>
+    loading: boolean
 }

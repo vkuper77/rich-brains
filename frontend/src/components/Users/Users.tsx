@@ -7,11 +7,13 @@ import {Client} from "../../state/types";
 import {useSortableTableContext} from "../../context/sortable-table/context";
 import {ButtonSmallCardType} from "../../costansts/buttons-small";
 import './style.css'
+import {useAppContext} from "../../context/app/context";
 
 const Users: React.FC = () => {
     const {state} = useStateContext()
     const {open, setNextScreen} = useModalContext()
     const sortParams = useSortableTableContext()
+    const app = useAppContext()
 
     const onPressCard = useCallback((client: Client) => {
         if (!state.isAuthenticated) {
@@ -33,9 +35,12 @@ const Users: React.FC = () => {
     return (
         <div className='users-wrapper'>
             <div className='users-container _container'>
-                {sortParams?.sortData.map((item) => <Card isAuthenticated={state.isAuthenticated} callback={onPressCard}
-                                                          secondaryCallback={onPressButtonsSmall}
-                                                          key={item.id} user={item}/>)}
+                {Boolean(sortParams?.sortData.length) ? sortParams?.sortData.map((item) => <Card
+                    isAuthenticated={state.isAuthenticated} callback={onPressCard}
+                    secondaryCallback={onPressButtonsSmall}
+                    key={item.id} user={item}/>) : !app?.loading &&
+                    <div style={{margin: '0 auto', fontSize: '1.5rem'}}>list empty</div>}
+                {app?.loading && <div style={{margin: '0 auto', fontSize: '1.5rem'}}>loading...</div>}
             </div>
         </div>
     );
