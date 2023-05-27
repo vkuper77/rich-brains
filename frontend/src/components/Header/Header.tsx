@@ -11,7 +11,7 @@ const User: React.FC<{ name: string }> = ({name}) => {
     const handleImageClick = useCallback(() => {
         open({type: ModalType.SignOut});
     }, []);
-
+    //todo разобраться почему не срабатывает клик в мобильной версии
     return <div onClick={handleImageClick} className='user-container'>
         <img style={{width: '16px', height: '16px', marginRight: '7px'}} alt='icon'
              src={require('../../assets/image/user.png')}/>
