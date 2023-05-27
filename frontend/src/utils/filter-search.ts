@@ -15,6 +15,6 @@ function firstSymbolSearch(data: any[] = [], key: string = '', value: string = '
 }
 
 export function filterSearch(data: any[] = [], key: string = '', value: string = ''): any[] {
-    // return defaultSearch(data, key, value)
-    return firstSymbolSearch(data, key, value)
+    return allSymbolSearch(data, key, value)
+    // return firstSymbolSearch(data, key, value)
 }
