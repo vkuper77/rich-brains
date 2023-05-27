@@ -25,20 +25,24 @@ const SearchPanel: React.FC = () => {
 
     return <div className='wrapper-search-filter'>
         <div className='container _container'>
-            <SearchInput
-                value={sortParams?.value}
-                setValue={sortParams?.setValue}
-                placeholder={`${shortenString(sortParams?.radioValue.name ?? '', 5)} to search...`}
-            />
-            <PanelParams
-                radioValue={sortParams?.radioValue ?? undefined}
-                tabValue={sortParams?.tabValue}
-                setRadioValue={sortParams?.setRadioValue}
-                setTabValue={sortParams?.setTabValue}
-                showParams={showParams}
-                setShowParams={setShowParams}
-            />
-            {state.isAuthenticated && <div style={{position: 'absolute', right: '-97px', top: '0px'}}>
+            <div className='search-input-wrapper'>
+                <SearchInput
+                    value={sortParams?.value}
+                    setValue={sortParams?.setValue}
+                    placeholder={`${shortenString(sortParams?.radioValue.name ?? '', 5)} to search...`}
+                />
+            </div>
+            <div className='panel-input-wrapper'>
+                <PanelParams
+                    radioValue={sortParams?.radioValue ?? undefined}
+                    tabValue={sortParams?.tabValue}
+                    setRadioValue={sortParams?.setRadioValue}
+                    setTabValue={sortParams?.setTabValue}
+                    showParams={showParams}
+                    setShowParams={setShowParams}
+                />
+            </div>
+            {state.isAuthenticated && <div className='add-button'>
                 <AddButton callback={onPressAdd}/>
             </div>}
         </div>

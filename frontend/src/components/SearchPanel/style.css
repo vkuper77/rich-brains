@@ -7,3 +7,49 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.add-button {
+    position: absolute;
+    right: -97px;
+    top: 0;
+}
+
+.search-input-wrapper {
+    width: 200px;
+}
+
+.panel-input-wrapper{
+    width: 15.6rem;
+}
+
+@media(max-width: 510px) {
+    .wrapper-search-filter {
+        margin: 30px 20px 20px 20px;
+    }
+
+    .panel-input-wrapper{
+        width: 280px;
+    }
+
+    .search-input-wrapper {
+        width: 280px;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media(max-width: 1120px) {
+    .add-button {
+        position: fixed;
+        right: 10px;
+        height: 95%;
+        display: flex;
+        align-items: flex-end;
+        z-index: 1;
+    }
+}

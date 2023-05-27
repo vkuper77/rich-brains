@@ -1,14 +1,15 @@
 .custom-alert-wrapper {
     position: fixed;
     top: 30px;
-    left: 0;
-    right: 0;
+    left: 10px;
+    right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 0;
     opacity: 0;
     transition: height 0.3s ease, opacity 0.3s ease;
+    z-index: 99;
 }
 
 .custom-alert-wrapper.show {

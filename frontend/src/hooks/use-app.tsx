@@ -48,10 +48,10 @@ export default () => {
             await AuthApi.signOut()
             dispatch({type: StoreActions.LOGOUT})
         } catch (e) {
-            console.error('[signOut]:', e)
-        } finally {
             /**show error tips*/
             setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
+            console.error('[signOut]:', e)
+        } finally {
             closeModal()
         }
     }, [])

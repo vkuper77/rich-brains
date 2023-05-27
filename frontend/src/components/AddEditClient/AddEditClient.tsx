@@ -80,7 +80,7 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
 
     return (
         <div className='client-wrapper'>
-            <div onClick={callback} className='cross-icon'>
+            <div onClick={callback} className='cross-icon client-cross-icon'>
                 <img alt='cross' src={require('../../assets/image/close.png')}/>
             </div>
             <form className='client-container' onSubmit={submit}>
@@ -88,8 +88,8 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
                 <div className='client-container-info'>
                     <img alt='avatar' className='client-avatar' src={require('../../assets/image/avatar.png')}/>
                     <div className='client-container-inputs'>
-                        <div className='client-container-name' style={{marginBottom: '20px'}}>
-                            <label className='label-inputs' style={{marginRight: '20px'}}>
+                        <div className='client-container-name'>
+                            <label className='label-inputs'>
                                 First name
                                 <Input placeholder={'First name'} style={{marginTop: '7px'}} type={'text'}
                                        value={firstName}
@@ -102,7 +102,7 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
                                        handleChange={handleLastNameChange}/>
                             </label>
                         </div>
-                        <label className='label-inputs'>
+                        <label className='label-inputs-date'>
                             Date of birth
                             <div style={{marginTop: '7px', marginBottom: '20px'}}>
                                 <InputDate setValue={handleBirthdayChange} value={birthday || null}/>
@@ -129,12 +129,12 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
                         </label>
                     </div>
                 </div>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <div style={{display: 'flex'}}>
-                        <div style={{width: '100px', marginRight: '10px'}}>
+                <div className='wrapper-buttons-footer'>
+                    <div className='container-buttons-footer'>
+                        <div className='button-footer'>
                             <MainButton type='submit' text='Save' styleButton='main-button'/>
                         </div>
-                        <div style={{width: '100px'}}>
+                        <div className='button-footer' style={{marginRight: 0}}>
                             <MainButton
                                 type='button'
                                 text='Cancel'
@@ -143,7 +143,9 @@ const AddEditClient: React.FC<AddEditClientProps> = ({callback}) => {
                             />
                         </div>
                     </div>
-                    {!data.isNew && <DeleteButton callback={onPressDelete}/>}
+                    {!data.isNew && <div className='button-delete-footer'>
+                        <DeleteButton callback={onPressDelete}/>
+                    </div>}
                 </div>
             </form>
         </div>

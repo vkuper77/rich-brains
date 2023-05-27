@@ -1,7 +1,7 @@
 import React from 'react';
 import {Client} from '../../state/types';
-import './style.css'
 import {BUTTONS_SMALL_CARD} from "../../costansts/buttons-small";
+import './style.css'
 
 interface CardProps {
     user: Client,

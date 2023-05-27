@@ -43,3 +43,33 @@
 .cross-icon:active, .show-icon:hover {
     opacity: 0.7;
 }
+
+@media (max-width: 500px) {
+    .sign-out-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .sign-out-container {
+        width: 260px;
+    }
+
+    .sign-out-title {
+        font-size: 2rem;
+        margin-bottom: 1.9rem;
+    }
+
+    .sign-out-text {
+        font-size: 1rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .sign-out-container > .button-custom {
+        font-size: 1rem;
+    }
+
+    .cross-icon{
+        top: 10px
+    }
+}

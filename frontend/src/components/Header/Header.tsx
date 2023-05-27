@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './styles.css'
 import {useModalContext} from "../../context/modal-desk/context";
 import {ModalType} from "../../costansts/type-modal";
@@ -7,13 +7,18 @@ import {useAppContext} from "../../context/app/context";
 
 const User: React.FC<{ name: string }> = ({name}) => {
     const {open} = useModalContext()
-    return <div onClick={() => {
-        open({type: ModalType.SignOut})
-    }} className='user-container'>
-        <img style={{width: '16px', height: '16px'}} alt='icon' src={require('../../assets/image/user.png')}/>
-        <span>{name}</span>
+
+    const handleImageClick = useCallback(() => {
+        open({type: ModalType.SignOut});
+    }, []);
+
+    return <div onClick={handleImageClick} className='user-container'>
+        <img style={{width: '16px', height: '16px', marginRight: '7px'}} alt='icon'
+             src={require('../../assets/image/user.png')}/>
+        <span className='user-container-title'>{name}</span>
         <img style={{width: '16px', height: '16px'}} alt='icon' src={require('../../assets/image/arrow-down.png')}/>
     </div>
+
 }
 
 const SignInButton: React.FC = () => {
@@ -43,7 +48,8 @@ const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
                     </div>
                     <div className='main'>
                         <h2 className='route'>{routeName}</h2>
-                        {!app?.loading ? state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/> : <div>loading...</div> }
+                        {!app?.loading ? state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/> :
+                            <div>loading...</div>}
                     </div>
                 </div>
             </div>
