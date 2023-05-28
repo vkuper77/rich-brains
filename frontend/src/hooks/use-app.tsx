@@ -80,7 +80,7 @@ export default () => {
             /**set store*/
             dispatch({type: StoreActions.ADD_CLIENT, payload: resp.client})
         } catch (e) {
-            setShowTips({type: TipsType.Error, message: 'you have successfully logged in', duration: 3000})
+            setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
             console.error('[addClient]:', e)
         } finally {
             closeModal()
