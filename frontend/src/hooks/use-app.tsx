@@ -20,7 +20,7 @@ export default () => {
         try {
             const response = await AuthApi.signIn(data)
             /**load emission*/
-            await sleep(1000)
+            // await sleep(1000)
             /**show success tips*/
             showTips && setShowTips({type: TipsType.Success, message: 'You have successfully logged in', duration: 3000})
             /**set store*/
