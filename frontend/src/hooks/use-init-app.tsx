@@ -10,7 +10,6 @@ export default function useInitApp() {
 		let user = localStorage.getItem(KeysLocalStorage.USER)
 		user = user && JSON.parse(user)
 		if(!state.isAuthenticated && user && Object.keys(user).length) {
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
 			app?.signIn({login: user!.login, password: user!.password}, false)
 		}
