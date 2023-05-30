@@ -1,19 +1,19 @@
-import {useLayoutEffect} from "react";
-import {useStateContext} from "../context/state/context";
-import {useAppContext} from "../context/app/context";
-import {KeysLocalStorage} from "../costansts/keys-local-storage";
+import {useLayoutEffect} from "react"
+import {useStateContext} from "../context/state/context"
+import {useAppContext} from "../context/app/context"
+import {KeysLocalStorage} from "../costansts/keys-local-storage"
 
 export default function useInitApp() {
-    const { state } = useStateContext()
-    const app = useAppContext()
-    useLayoutEffect(() => {
-        let user = localStorage.getItem(KeysLocalStorage.USER)
-        user = user && JSON.parse(user)
-        if(!state.isAuthenticated && user && Object.keys(user).length) {
+	const { state } = useStateContext()
+	const app = useAppContext()
+	useLayoutEffect(() => {
+		let user = localStorage.getItem(KeysLocalStorage.USER)
+		user = user && JSON.parse(user)
+		if(!state.isAuthenticated && user && Object.keys(user).length) {
             // @ts-ignore
             app!.signIn({login: user!.login, password: user!.password}, false)
-        }
-        app?.getClients()
-    }, [])
-    return null
+		}
+		app?.getClients()
+	}, [])
+	return null
 }

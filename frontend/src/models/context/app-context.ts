@@ -1,5 +1,5 @@
-import {ReactNode} from "react";
-import {AddClientParams, EditClientParams, SignInParams} from "../responce/responce";
+import {ReactNode} from "react"
+import {AddClientParams, EditClientParams, SignInParams} from "../responce/responce"
 
 export interface ProviderProps {
     children: ReactNode;

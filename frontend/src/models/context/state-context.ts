@@ -1,5 +1,5 @@
-import {Action, State} from "../../state/types";
-import React, {ReactNode} from "react";
+import {Action, State} from "../../state/types"
+import React, {ReactNode} from "react"
 
 export interface StateContextProps {
     state: State;

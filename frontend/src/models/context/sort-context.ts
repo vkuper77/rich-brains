@@ -1,5 +1,5 @@
-import { Client } from "../../state/types";
-import {FilterOption} from "../../costansts/type-filters";
+import { Client } from "../../state/types"
+import {FilterOption} from "../../costansts/type-filters"
 
 export interface SortContextValue {
     sortData: Client[]

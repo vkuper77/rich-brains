@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent} from 'react'
 import './style.css'
 
 interface InputProps {
@@ -11,18 +11,18 @@ interface InputProps {
 }
 
 const Input: React.FC<InputProps> = ({type = '', placeholder, value = '', id = '', handleChange = () => undefined, style = {}}) => {
-    return (
-        <input
-            className="input-custom"
-            id={id}
-            type={type}
-            value={value}
-            onChange={handleChange}
-            required
-            placeholder={placeholder}
-            style={style}
-        />
-    );
-};
+	return (
+		<input
+			className="input-custom"
+			id={id}
+			type={type}
+			value={value}
+			onChange={handleChange}
+			required
+			placeholder={placeholder}
+			style={style}
+		/>
+	)
+}
 
-export default Input;
+export default Input
