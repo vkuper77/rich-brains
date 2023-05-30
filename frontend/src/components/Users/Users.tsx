@@ -8,12 +8,14 @@ import {useSortableTableContext} from "../../context/sortable-table/context"
 import {ButtonSmallCardType} from "../../costansts/buttons-small"
 import './style.css'
 import {useAppContext} from "../../context/app/context"
+import {LoadingType} from "../../costansts/loading"
 
 const Users: React.FC = () => {
 	const {state} = useStateContext()
 	const {open, setNextScreen} = useModalContext() ?? {}
 	const sortParams = useSortableTableContext()
 	const app = useAppContext()
+	const loading: {[key: number ]:boolean} = app?.loading ?? {[LoadingType.GET_CLIENTS]: false}
 
 	const onPressCard = useCallback((client: Client) => {
 		if (!state.isAuthenticated) {
@@ -38,9 +40,9 @@ const Users: React.FC = () => {
 				{sortParams?.sortData.length ? sortParams?.sortData.map((item) => <Card
 					isAuthenticated={state.isAuthenticated} callback={onPressCard}
 					secondaryCallback={onPressButtonsSmall}
-					key={item.id} user={item}/>) : !app?.loading &&
+					key={item.id} user={item}/>) : !loading[LoadingType.GET_CLIENTS] &&
                     <div style={{margin: '0 auto', fontSize: '1.5rem'}}>list empty</div>}
-				{app?.loading && <div style={{margin: '0 auto', fontSize: '1.5rem'}}>loading...</div>}
+				{loading[LoadingType.GET_CLIENTS] && <div style={{margin: '0 auto', fontSize: '1.5rem'}}>loading...</div>}
 			</div>
 		</div>
 	)

@@ -4,6 +4,7 @@ import {useModalContext} from "../../context/modal-desk/context"
 import {ModalType} from "../../costansts/type-modal"
 import {useStateContext} from "../../context/state/context"
 import {useAppContext} from "../../context/app/context"
+import {LoadingType} from "../../costansts/loading"
 
 const User: React.FC<{ name: string }> = ({name}) => {
 	const {open} = useModalContext() ?? {}
@@ -13,7 +14,7 @@ const User: React.FC<{ name: string }> = ({name}) => {
 	}, [])
 
 	//todo разобраться почему не срабатывает клик в мобильной версии
-	return <div onClick={handleImageClick} className='user-container'>
+	return <div aria-hidden="true" onClick={handleImageClick} className='user-container'>
 		<img style={{width: '16px', height: '16px', marginRight: '7px'}} alt='icon'
 			src={require('../../assets/image/user.png')}/>
 		<span className='user-container-title'>{name}</span>
@@ -24,7 +25,7 @@ const User: React.FC<{ name: string }> = ({name}) => {
 
 const SignInButton: React.FC = () => {
 	const {open} = useModalContext() ?? {}
-	return <div className='button' onClick={() => {
+	return <div aria-hidden="true" className='button' onClick={() => {
 		open?.({type: ModalType.SignIn})
 	}}>
 		<img alt='icon' className='icon' src={require('../../assets/image/log-in.png')}/>
@@ -39,6 +40,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
 	const {state} = useStateContext()
 	const app = useAppContext()
+	const loading: { [key: number]: boolean } = app?.loading ?? {[LoadingType.SIGN_IN]: false}
 	return (
 		<>
 			<div className='wrapper'>
@@ -49,7 +51,8 @@ const Header: React.FC<HeaderProps> = ({routeName = 'Clients'}) => {
 					</div>
 					<div className='main'>
 						<h2 className='route'>{routeName}</h2>
-						{!app?.loading ? state.isAuthenticated ? <User name={state.user!.login}/> : <SignInButton/> :
+						{!loading[LoadingType.SIGN_IN] ? state.isAuthenticated ? <User name={state.user!.login}/> :
+							<SignInButton/> :
 							<div>loading...</div>}
 					</div>
 				</div>

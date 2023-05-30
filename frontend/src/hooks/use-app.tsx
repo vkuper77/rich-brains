@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import {useCallback, useState} from 'react'
 import {useModalContext} from "../context/modal-desk/context"
 import {AppApi, AuthApi} from "../api"
 import {useStateContext} from "../context/state/context"
@@ -7,20 +7,28 @@ import {AddClientParams, EditClientParams, SignInParams} from "../models/responc
 import {useTipsContext} from "../context/tips/context"
 import {TipsType} from "../costansts/type-modal"
 import {sleep} from "../utils/sleep"
+import {LoadingType} from "../costansts/loading"
+
+type l = {[key: number ]:boolean}
+
+const initialSateLoad: l = {
+	[LoadingType.SIGN_IN]: false,
+	[LoadingType.GET_CLIENTS]: false
+}
 
 export default () => {
 	const {close: closeModal, open, prevScreen} = useModalContext() ?? {}
 	const { setShowTips } = useTipsContext()
 	const {dispatch} = useStateContext()
-	const [loading, setLoading] = useState<boolean>(false)
+	const [loading, setLoading] = useState<l>(initialSateLoad)
 
 	/** Sign In User to App */
 	const signIn = useCallback(async (data: SignInParams, showTips = true) => {
-		setLoading(true)
+		setLoading((p) =>
+			({...p, [LoadingType.SIGN_IN]: true})
+		)
 		try {
 			const response = await AuthApi.signIn(data)
-			/**load emission*/
-			// await sleep(1000)
 			/**show success tips*/
 			showTips && setShowTips({type: TipsType.Success, message: 'You have successfully logged in', duration: 3000})
 			/**set store*/
@@ -38,7 +46,9 @@ export default () => {
 			console.error('[signIn]:', e)
 			closeModal?.()
 		} finally {
-			setLoading(false)
+			setLoading((p) =>
+				({...p, [LoadingType.SIGN_IN]: false})
+			)
 		}
 	}, [prevScreen])
 
@@ -58,6 +68,9 @@ export default () => {
 
 	/** Get Clients */
 	const getClients = useCallback(async () => {
+		setLoading((p) =>
+			({...p, [LoadingType.GET_CLIENTS]: true})
+		)
 		try {
 			const resp = await AppApi.getClients()
 			/**load emission*/
@@ -68,6 +81,10 @@ export default () => {
 			/**show error tips*/
 			setShowTips({type: TipsType.Error, message: 'Something went wrong', duration: 3000})
 			console.error('[getClients]:', e)
+		} finally {
+			setLoading((p) =>
+				({...p, [LoadingType.GET_CLIENTS]: false})
+			)
 		}
 	}, [])
 

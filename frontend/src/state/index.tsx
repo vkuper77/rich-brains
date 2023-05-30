@@ -1,11 +1,17 @@
-import React from 'react'
 import {Action, Client, State, StoreActions} from "./types"
 import {produce} from "immer"
 import {formattedBirthDate} from "../utils/formatted-date"
+import {KeysLocalStorage} from "../costansts/keys-local-storage"
+
+const storedUser = localStorage.getItem(KeysLocalStorage.USER)
+let user: { login: string } | null = null
+if (storedUser) {
+	user = JSON.parse(storedUser)
+}
 
 export const initialState: State = {
-	isAuthenticated: false,
-	user: null,
+	isAuthenticated: Boolean(user),
+	user: user || null,
 	clients: [],
 }
 

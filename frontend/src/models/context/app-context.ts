@@ -12,5 +12,5 @@ export interface AppContextValue {
     getClients(): Promise<void>
     addClient(p: AddClientParams): Promise<void>
     editClient(p: EditClientParams): Promise<void>
-    loading: boolean
+    loading: {[key: number ]:boolean}
 }
