@@ -14,7 +14,7 @@ const User: React.FC<{ name: string }> = ({name}) => {
 	}, [])
 
 	//todo разобраться почему не срабатывает клик в мобильной версии
-	return <div aria-hidden="true" onClick={handleImageClick} className='user-container'>
+	return <div onClick={handleImageClick} className='user-container'>
 		<img style={{width: '16px', height: '16px', marginRight: '7px'}} alt='icon'
 			src={require('../../assets/image/user.png')}/>
 		<span className='user-container-title'>{name}</span>
@@ -25,7 +25,7 @@ const User: React.FC<{ name: string }> = ({name}) => {
 
 const SignInButton: React.FC = () => {
 	const {open} = useModalContext() ?? {}
-	return <div aria-hidden="true" className='button' onClick={() => {
+	return <div className='button' onClick={() => {
 		open?.({type: ModalType.SignIn})
 	}}>
 		<img alt='icon' className='icon' src={require('../../assets/image/log-in.png')}/>

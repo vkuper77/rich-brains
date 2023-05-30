@@ -34,8 +34,8 @@ const ModalDesk: React.FC = () => {
 	const Content = Desk[modal?.state.type ?? 0]
 	return (
 		<>
-			<Modal isOpen={Boolean(modal?.state.type)} onClose={close}>
-				<Content state={modal?.state ?? null} callback={close}/>
+			<Modal isOpen={Boolean(modal!.state.type)} onClose={modal!.close}>
+				<Content state={modal!.state ?? null} callback={modal!.close}/>
 			</Modal>
 		</>
 	)

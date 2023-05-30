@@ -1,13 +1,9 @@
 import {Action, Client, State, StoreActions} from "./types"
 import {produce} from "immer"
 import {formattedBirthDate} from "../utils/formatted-date"
-import {KeysLocalStorage} from "../costansts/keys-local-storage"
+import {getUserFromLocalStorage} from "../utils/user-local-storage"
 
-const storedUser = localStorage.getItem(KeysLocalStorage.USER)
-let user: { login: string } | null = null
-if (storedUser) {
-	user = JSON.parse(storedUser)
-}
+const user = getUserFromLocalStorage()
 
 export const initialState: State = {
 	isAuthenticated: Boolean(user),
