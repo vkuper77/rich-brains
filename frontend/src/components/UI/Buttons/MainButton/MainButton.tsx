@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './style.css'
 
 interface MainButtonProps {
@@ -9,7 +9,7 @@ interface MainButtonProps {
 }
 
 const MainButton: React.FC<MainButtonProps> = ({type = 'button', text = '', styleButton = 'main-button', callback = () => undefined}) => {
-    return <button onClick={callback} className={`button-custom ${styleButton}`} type={type}>{text}</button>
-};
+	return <button onClick={callback} className={`button-custom ${styleButton}`} type={type}>{text}</button>
+}
 
-export default MainButton;
+export default MainButton

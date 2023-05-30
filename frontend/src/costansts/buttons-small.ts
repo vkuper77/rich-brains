@@ -4,6 +4,6 @@ export enum ButtonSmallCardType {
 }
 
 export const BUTTONS_SMALL_CARD = [{id: ButtonSmallCardType.Edit, icon: require('../assets/image/edit.png')}, {
-    id: ButtonSmallCardType.Delete,
-    icon: require('../assets/image/trash-black.png')
+	id: ButtonSmallCardType.Delete,
+	icon: require('../assets/image/trash-black.png')
 }]

@@ -1,0 +1,27 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "plugins": ["@typescript-eslint","react", "jsx-a11y"],
+  "rules": {
+    "semi": ["error", "never"],
+    "indent": ["error", "tab"],
+    "jsx-a11y/click-events-have-key-events": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import {ReactNode} from "react";
-import {AddClientParams, EditClientParams, SignInParams} from "../responce/responce";
+import {ReactNode} from "react"
+import {AddClientParams, EditClientParams, SignInParams} from "../responce/responce"
 
 export interface ProviderProps {
     children: ReactNode;
@@ -12,5 +12,5 @@ export interface AppContextValue {
     getClients(): Promise<void>
     addClient(p: AddClientParams): Promise<void>
     editClient(p: EditClientParams): Promise<void>
-    loading: boolean
+    loading: {[key: number ]:boolean}
 }
