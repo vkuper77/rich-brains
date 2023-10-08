@@ -1,7 +1,7 @@
 import {KeysLocalStorage} from "../costansts/keys-local-storage"
 
 export class FetchConstructor {
-    private readonly baseUrl: string;
+    private readonly baseUrl: string
 
     constructor(url: string) {
         this.baseUrl = url
