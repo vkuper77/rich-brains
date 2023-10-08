@@ -9,7 +9,6 @@ export default function useInitApp() {
     useEffect(() => {
         const user = getUserFromLocalStorage()
         if (!state.isAuthenticated && user && Object.keys(user).length) {
-            // @ts-ignore
             app?.signIn({login: user!.login, password: user!.password}, false)
         }
         app?.getClients()

@@ -15,7 +15,7 @@ const Users: React.FC = () => {
 	const {open, setNextScreen} = useModalContext() ?? {}
 	const sortParams = useSortableTableContext()
 	const app = useAppContext()
-	const loading: {[key: number ]:boolean} = app?.loading ?? {[LoadingType.GET_CLIENTS]: false}
+	const loading: {[key: number ]:boolean} = app!.loading ?? {[LoadingType.GET_CLIENTS]: false}
 
 	const onPressCard = useCallback((client: Client) => {
 		if (!state.isAuthenticated) {
@@ -41,7 +41,7 @@ const Users: React.FC = () => {
 					isAuthenticated={state.isAuthenticated} callback={onPressCard}
 					secondaryCallback={onPressButtonsSmall}
 					key={item.id} user={item}/>) : !loading[LoadingType.GET_CLIENTS] &&
-                    <div style={{margin: '0 auto', fontSize: '1.5rem'}}>list empty</div>}
+                    <div style={{margin: '0 auto', fontSize: '1.5rem'}}>List Empty</div>}
 				{loading[LoadingType.GET_CLIENTS] && <div style={{margin: '0 auto', fontSize: '1.5rem'}}>loading...</div>}
 			</div>
 		</div>
